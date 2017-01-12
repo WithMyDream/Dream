@@ -10,6 +10,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Logic">
+      <UniqueIdentifier>{5d945ef4-6a28-421f-8f16-3875671dba2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\View">
+      <UniqueIdentifier>{91a775be-f5fd-48e4-8f56-27b39f34fde3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,6 +27,21 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Logic\EventMgr.cpp">
+      <Filter>src\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Logic\Unit.cpp">
+      <Filter>src\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Logic\World.cpp">
+      <Filter>src\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\View\Actor.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\View\GameScene.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -31,6 +52,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Logic\EventMgr.h">
+      <Filter>src\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Logic\EventTypes.h">
+      <Filter>src\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Logic\Unit.h">
+      <Filter>src\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Logic\World.h">
+      <Filter>src\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View\Actor.h">
+      <Filter>src\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View\GameScene.h">
+      <Filter>src\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
