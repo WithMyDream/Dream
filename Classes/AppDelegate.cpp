@@ -56,7 +56,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0f / 60);
 
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    glview->setDesignResolutionSize(960, 640, ResolutionPolicy::EXACT_FIT);
+    
+    /*
     auto frameSize = glview->getFrameSize();
     // if the frame's height is larger than the height of medium size.
     if (frameSize.height > mediumResolutionSize.height)
@@ -73,6 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     {        
         director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
     }
+     */
 
     register_all_packages();
     
@@ -81,6 +84,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     EventMgr::getInatence();
     GameScene* scene = GameScene::create();
     director->runWithScene(scene);
+    
+    // test
+    world->createUnit(1);
 
     return true;
 }

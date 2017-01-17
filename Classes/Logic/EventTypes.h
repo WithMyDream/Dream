@@ -12,20 +12,19 @@ class EventParams
 {
 public:
     EventParams(EventType eventType):_eventType(eventType){};
-    virtual ~EventParams();
     
     EventType _eventType;
 };
 
+class Unit;
 class ECreateUnit : public EventParams
 {
 public:
-    ECreateUnit(int ID):EventParams(EventCreateUnit)
-    ,_ID(ID)
+    ECreateUnit(Unit* unit):EventParams(EventCreateUnit)
+    ,_unit(unit)
     {};
-    ~ECreateUnit();
     
-    int _ID;
+    Unit* _unit;
 };
 
 #endif // __EventTypes_H__

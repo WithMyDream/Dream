@@ -36,7 +36,7 @@ void EventMgr::init()
 {
     _eventHandlers.resize(EventMax);
     for (int i=0; i<EventMax; ++i) {
-        _eventHandlers.push_back(new std::list<EventHandler*>());
+        _eventHandlers.push_back(new std::list<EventHandler>());
     }
 }
 
@@ -47,17 +47,17 @@ void EventMgr::registerEvent(EventType eventType, EventHandler eventHandler)
         return;
     }
     
-    _eventHandlers.at(eventType)->push_back(&eventHandler);
+    _eventHandlers.at(eventType)->push_back(eventHandler);
 }
 
 void EventMgr::unregisterHandler(EventHandler eventHandler)
 {
-    for (int i=0; i<EventMax; ++i) {
-        std::list<EventHandler*>* handles = _eventHandlers.at(i);
-        std::list<EventHandler*>::iterator it = std::find(handles->begin(), handles->end(), eventHandler);
-        if (it != handles->end())
-            handles->erase(it);
-    }
+//    for (int i=0; i<EventMax; ++i) {
+//        std::list<EventHandler>* handles = _eventHandlers.at(i);
+//        std::list<EventHandler>::iterator it = std::find(handles->begin(), handles->end(), eventHandler);
+//        if (it != handles->end())
+//            handles->erase(it);
+//    }
 }
 
 void EventMgr::unregisterEvent(EventType eventType)
@@ -67,9 +67,9 @@ void EventMgr::unregisterEvent(EventType eventType)
 
 void EventMgr::notify(EventParams &params)
 {
-    std::list<EventHandler*>* handles = _eventHandlers.at(params._eventType);
-    std::list<EventHandler*>::iterator it = handles->begin();
+    std::list<EventHandler>* handles = _eventHandlers.at(params._eventType);
+    std::list<EventHandler>::iterator it = handles->begin();
     for (; it != handles->end(); ++it) {
-        (**it)(params);
+        (*it)(params);
     }
 }

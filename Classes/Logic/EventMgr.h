@@ -4,9 +4,15 @@
 #include "EventTypes.h"
 #include <vector>
 
-#define REGISTER_EVENT(eventType, handler) EventMgr::getInatence()->registerEvent(eventType, handler);
+#define REGISTER_EVENT(eventType, classFunc) \
+    EventHandler handler = [this](EventParams& params) \
+    { \
+        CCLOG("EventHandler ~~~~ "); \
+        this->classFunc(params); \
+    }; \
+    EventMgr::getInatence()->registerEvent(eventType, handler); \
+
 #define UNREGISTER_EVENT(handler) EventMgr::getInatence()->unregisterHandler(handler);
-#define BIND_ [obj](obj, EventHandler handler){}
 
 typedef std::function<void(EventParams&)> EventHandler;
 
@@ -26,7 +32,7 @@ public:
     
     void notify(EventParams &params);
 private:
-    std::vector<std::list<EventHandler*>*> _eventHandlers;
+    std::vector<std::list<EventHandler>*> _eventHandlers;
 };
 
 #endif // __EventMgr_H__

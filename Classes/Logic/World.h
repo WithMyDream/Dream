@@ -4,6 +4,9 @@
 #include "base/CCRef.h"
 #include "external/Box2D/Box2D.h"
 #include "Unit.h"
+#include <vector>
+
+extern const float B2SCALE;
 
 class World : public cocos2d::Ref
 {
@@ -14,13 +17,13 @@ public:
     ~World();
     bool init();
     
-    b2World* getWorld();
+    b2World* getB2World(){ return _b2World; }
     
     void setGravity(float grivaty);
-    float getGravity();
+    float getGravity(){ return _gravity; }
     
-    void createUnit(ID);
-    void destroyUnit();
+    void createUnit(int ID);
+    void destroyUnit(int index);
     
     void pusher(float dt);
 private:

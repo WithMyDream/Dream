@@ -2,6 +2,7 @@
 
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
+#include "EventMgr.h"
 
 const float InitGravity = -10.0f;
 const int VelocityIterations = 10;
@@ -38,23 +39,24 @@ bool World::init()
     cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
     
     // base world frame
-    b2BodyDef worldFrameBodyDef;
-    b2Body* worldFrameBody = _b2World->CreateBody(&worldFrameBodyDef);
-    b2FixtureDef worldFrameFixtureDef;
-    b2EdgeShape worldFrameEdge;
-    worldFrameFixtureDef.shape = &worldFrameEdge;
+    b2BodyDef bodyDef;
+    b2Body* body = _b2World->CreateBody(&bodyDef);
+    body->SetUserData(this);
+    b2FixtureDef fixtureDef;
+    b2EdgeShape edgeShap;
+    fixtureDef.shape = &edgeShap;
     // bottom
-    worldFrameEdge.Set(b2Vec2(0.0f, 0.0f), b2Vec2(winSize.width/B2SCALE, 0.0f));
-    worldFrameBody->CreateFixture(&worldFrameFixtureDef);
+    edgeShap.Set(b2Vec2(0.0f, 0.0f), b2Vec2(winSize.width/B2SCALE, 0.0f));
+    body->CreateFixture(&fixtureDef);
     // left
-    worldFrameEdge.Set(b2Vec2(0.0f, 0.0f), b2Vec2(0.0f, winSize.height/B2SCALE));
-    worldFrameBody->CreateFixture(&worldFrameFixtureDef);
+    edgeShap.Set(b2Vec2(0.0f, 0.0f), b2Vec2(0.0f, winSize.height/B2SCALE));
+    body->CreateFixture(&fixtureDef);
     // right
-    worldFrameEdge.Set(b2Vec2(winSize.width/B2SCALE, 0.0f), b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
-    worldFrameBody->CreateFixture(&worldFrameFixtureDef);
+    edgeShap.Set(b2Vec2(winSize.width/B2SCALE, 0.0f), b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
+    body->CreateFixture(&fixtureDef);
     // top
-    worldFrameEdge.Set(b2Vec2(0.0f, winSize.height/B2SCALE), b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
-    worldFrameBody->CreateFixture(&worldFrameFixtureDef);
+    edgeShap.Set(b2Vec2(0.0f, winSize.height/B2SCALE), b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
+    body->CreateFixture(&fixtureDef);
     
     cocos2d::Scheduler* scheduler = cocos2d::Director::getInstance()->getScheduler();
     scheduler->schedule(CC_SCHEDULE_SELECTOR(World::pusher), this, 0, false);
@@ -68,9 +70,19 @@ void World::setGravity(float grivaty)
     _b2World->SetGravity(b2Vec2(0.0f, _gravity));
 }
 
-float World::getGravity()
+void World::createUnit(int ID)
 {
-    return _gravity;
+    Unit* unit = Unit::create(this);
+    unit->retain();
+    _units.push_back(unit);
+    
+    ECreateUnit params(unit);
+    EventMgr::getInatence()->notify(params);
+}
+
+void World::destroyUnit(int index)
+{
+    
 }
 
 void World::pusher(float dt)
@@ -80,5 +92,10 @@ void World::pusher(float dt)
 
 void World::update(float dt)
 {
+    //CCLOG("[World::update] %f", dt);
     _b2World->Step(dt, VelocityIterations, PositionIterations);
+    
+    std::vector<Unit*>::iterator it = _units.begin();
+    for ( ; it != _units.end(); ++it)
+        (*it)->update(dt);
 }
