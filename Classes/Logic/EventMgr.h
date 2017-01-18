@@ -3,6 +3,9 @@
 
 #include "EventTypes.h"
 #include <vector>
+#include <list>
+#include <functional>
+#include "base/CCConsole.h"
 
 #define REGISTER_EVENT(eventType, classFunc) \
     EventHandler handler = [this](EventParams& params) \

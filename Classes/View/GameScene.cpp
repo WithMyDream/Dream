@@ -31,7 +31,7 @@ bool GameScene::init()
 void GameScene::onCreateUnit(EventParams &params)
 {
     ECreateUnit create = static_cast<ECreateUnit&>(params);
-    //CCLOG("[onCreateUnit] %08x ", create._unit);
+    CCLOG("[onCreateUnit] %08x ", create._unit);
     Actor* actor = Actor::create();
     actor->setUnit(create._unit);
     addChild(actor);

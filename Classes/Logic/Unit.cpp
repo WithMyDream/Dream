@@ -1,6 +1,7 @@
 #include "Unit.h"
 
 #include "World.h"
+#include "base/CCDirector.h"
 
 Unit* Unit::create(World* world)
 {
