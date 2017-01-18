@@ -83,6 +83,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     world->retain();
     EventMgr::getInatence();
     GameScene* scene = GameScene::create();
+    scene->setDebugDraw(world->getB2World());
     director->runWithScene(scene);
     
     // test

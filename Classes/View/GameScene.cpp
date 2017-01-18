@@ -10,6 +10,7 @@ GameScene* GameScene::create()
 }
 
 GameScene::GameScene()
+: _debugDrawLayer(nullptr)
 {
     
 }
@@ -21,11 +22,25 @@ GameScene::~GameScene()
 
 bool GameScene::init()
 {
+    Scene::init();
+    
     REGISTER_EVENT(EventCreateUnit, onCreateUnit);
     
     scheduleUpdate();
     
     return true;
+}
+
+void GameScene::setDebugDraw(b2World* b2word)
+{
+    _debugDrawLayer = B2DebugDrawLayer::create(b2word, B2SCALE);
+    addChild(_debugDrawLayer, 9999999);
+}
+
+void GameScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
+{
+   if (_debugDrawLayer)
+       _debugDrawLayer->draw(renderer, transform, flags);
 }
 
 void GameScene::onCreateUnit(EventParams &params)
@@ -34,6 +49,7 @@ void GameScene::onCreateUnit(EventParams &params)
     CCLOG("[onCreateUnit] %08x ", create._unit);
     Actor* actor = Actor::create();
     actor->setUnit(create._unit);
+    actor->setLocalZOrder(-1);
     addChild(actor);
     _actors.push_back(actor);
 }

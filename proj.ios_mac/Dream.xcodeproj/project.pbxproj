@@ -82,6 +82,8 @@
 		FCE687FB1E223B1200434C3D /* View in Resources */ = {isa = PBXBuildFile; fileRef = FCE687FA1E223B1200434C3D /* View */; };
 		FCE688031E224E2400434C3D /* EventMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE688001E224E2400434C3D /* EventMgr.cpp */; };
 		FCE688041E224E2400434C3D /* EventMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE688001E224E2400434C3D /* EventMgr.cpp */; };
+		FCFD47F11E2FB7C60084EA18 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47EF1E2FB7C60084EA18 /* GLES-Render.cpp */; };
+		FCFD47F51E2FC0F90084EA18 /* B2DebugDrawLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47F31E2FC0F90084EA18 /* B2DebugDrawLayer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +199,10 @@
 		FCE688001E224E2400434C3D /* EventMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventMgr.cpp; sourceTree = "<group>"; };
 		FCE688011E224E2400434C3D /* EventMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMgr.h; sourceTree = "<group>"; };
 		FCE688091E22508800434C3D /* EventTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTypes.h; sourceTree = "<group>"; };
+		FCFD47EF1E2FB7C60084EA18 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
+		FCFD47F01E2FB7C60084EA18 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
+		FCFD47F31E2FC0F90084EA18 /* B2DebugDrawLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DebugDrawLayer.cpp; sourceTree = "<group>"; };
+		FCFD47F41E2FC0F90084EA18 /* B2DebugDrawLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DebugDrawLayer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,10 +404,10 @@
 				FCE688001E224E2400434C3D /* EventMgr.cpp */,
 				FCE688011E224E2400434C3D /* EventMgr.h */,
 				FCE688091E22508800434C3D /* EventTypes.h */,
-				FC5A5C6E1E26714900B04EEF /* World.cpp */,
-				FC5A5C6F1E26714900B04EEF /* World.h */,
 				FC5A5C731E2696BF00B04EEF /* Unit.cpp */,
 				FC5A5C741E2696BF00B04EEF /* Unit.h */,
+				FC5A5C6E1E26714900B04EEF /* World.cpp */,
+				FC5A5C6F1E26714900B04EEF /* World.h */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -409,10 +415,14 @@
 		FCE688021E224E2400434C3D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FC5A5C791E269A3200B04EEF /* GameScene.cpp */,
-				FC5A5C7A1E269A3200B04EEF /* GameScene.h */,
 				FC5A5C771E269A3200B04EEF /* Actor.cpp */,
 				FC5A5C781E269A3200B04EEF /* Actor.h */,
+				FCFD47F31E2FC0F90084EA18 /* B2DebugDrawLayer.cpp */,
+				FCFD47F41E2FC0F90084EA18 /* B2DebugDrawLayer.h */,
+				FC5A5C791E269A3200B04EEF /* GameScene.cpp */,
+				FC5A5C7A1E269A3200B04EEF /* GameScene.h */,
+				FCFD47EF1E2FB7C60084EA18 /* GLES-Render.cpp */,
+				FCFD47F01E2FB7C60084EA18 /* GLES-Render.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -575,8 +585,10 @@
 				FC5A5C7D1E269A3200B04EEF /* GameScene.cpp in Sources */,
 				FC5A5C7B1E269A3200B04EEF /* Actor.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				FCFD47F51E2FC0F90084EA18 /* B2DebugDrawLayer.cpp in Sources */,
 				FC5A5C751E2696BF00B04EEF /* Unit.cpp in Sources */,
 				FC5A5C701E26714900B04EEF /* World.cpp in Sources */,
+				FCFD47F11E2FB7C60084EA18 /* GLES-Render.cpp in Sources */,
 				FCE688031E224E2400434C3D /* EventMgr.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,

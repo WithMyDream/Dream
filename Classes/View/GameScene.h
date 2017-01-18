@@ -2,9 +2,10 @@
 #define __GameScene_H__
 
 #include "cocos2d.h"
+#include <vector>
 #include "Actor.h"
 #include "../Logic/EventMgr.h"
-#include <vector>
+#include "B2DebugDrawLayer.h"
 
 using namespace cocos2d;
 
@@ -15,17 +16,24 @@ public:
     
     GameScene();
     ~GameScene();
-    bool init();
+    bool init() override;
+    
+    void setDebugDraw(b2World* b2word);
+    
+    void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
     
     void onCreateUnit(EventParams &params);
     
-    void update(float dt);
+    void update(float dt) override;
     
 private:
     
     
 private:
     std::vector<Actor*> _actors;
+    
+    
+    B2DebugDrawLayer*   _debugDrawLayer;
 };
 
 #endif // __GameScene_H__
