@@ -2,7 +2,7 @@
 #define __World_H__
 
 #include "base/CCRef.h"
-#include "external/Box2D/Box2D.h"
+#include "Box2D/Box2D.h"
 #include "Unit.h"
 #include <vector>
 
