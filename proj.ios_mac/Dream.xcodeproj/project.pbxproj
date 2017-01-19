@@ -23,8 +23,6 @@
 		46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
-		46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
-		46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -84,6 +82,12 @@
 		FCE688041E224E2400434C3D /* EventMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE688001E224E2400434C3D /* EventMgr.cpp */; };
 		FCFD47F11E2FB7C60084EA18 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47EF1E2FB7C60084EA18 /* GLES-Render.cpp */; };
 		FCFD47F51E2FC0F90084EA18 /* B2DebugDrawLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47F31E2FC0F90084EA18 /* B2DebugDrawLayer.cpp */; };
+		FCFD47F91E3104220084EA18 /* UIGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47F71E3104220084EA18 /* UIGameScene.cpp */; };
+		FCFD47FA1E3104220084EA18 /* UIGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47F71E3104220084EA18 /* UIGameScene.cpp */; };
+		FCFD47FD1E3105B10084EA18 /* UIInputLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47FB1E3105B10084EA18 /* UIInputLayer.cpp */; };
+		FCFD47FE1E3105B10084EA18 /* UIInputLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFD47FB1E3105B10084EA18 /* UIInputLayer.cpp */; };
+		FCFD48001E310D080084EA18 /* GUI in Resources */ = {isa = PBXBuildFile; fileRef = FCFD47FF1E310D080084EA18 /* GUI */; };
+		FCFD48011E310D080084EA18 /* GUI in Resources */ = {isa = PBXBuildFile; fileRef = FCFD47FF1E310D080084EA18 /* GUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,8 +142,6 @@
 		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
-		46880B8719C43A87006E1F66 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -203,6 +205,11 @@
 		FCFD47F01E2FB7C60084EA18 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		FCFD47F31E2FC0F90084EA18 /* B2DebugDrawLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = B2DebugDrawLayer.cpp; sourceTree = "<group>"; };
 		FCFD47F41E2FC0F90084EA18 /* B2DebugDrawLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B2DebugDrawLayer.h; sourceTree = "<group>"; };
+		FCFD47F71E3104220084EA18 /* UIGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIGameScene.cpp; sourceTree = "<group>"; };
+		FCFD47F81E3104220084EA18 /* UIGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGameScene.h; sourceTree = "<group>"; };
+		FCFD47FB1E3105B10084EA18 /* UIInputLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIInputLayer.cpp; sourceTree = "<group>"; };
+		FCFD47FC1E3105B10084EA18 /* UIInputLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIInputLayer.h; sourceTree = "<group>"; };
+		FCFD47FF1E310D080084EA18 /* GUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +334,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FCFD47FF1E310D080084EA18 /* GUI */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
@@ -342,8 +350,7 @@
 			children = (
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
-				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+				FCFD47F61E3104220084EA18 /* GUI */,
 				FCE687FF1E224E2400434C3D /* Logic */,
 				FCE688021E224E2400434C3D /* View */,
 			);
@@ -425,6 +432,17 @@
 				FCFD47F01E2FB7C60084EA18 /* GLES-Render.h */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FCFD47F61E3104220084EA18 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				FCFD47FB1E3105B10084EA18 /* UIInputLayer.cpp */,
+				FCFD47FC1E3105B10084EA18 /* UIInputLayer.h */,
+				FCFD47F71E3104220084EA18 /* UIGameScene.cpp */,
+				FCFD47F81E3104220084EA18 /* UIGameScene.h */,
+			);
+			path = GUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -538,6 +556,7 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				FCE687F81E223AEC00434C3D /* Logic in Resources */,
+				FCFD48001E310D080084EA18 /* GUI in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
@@ -570,6 +589,7 @@
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
+				FCFD48011E310D080084EA18 /* GUI in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
 			);
@@ -590,9 +610,10 @@
 				FC5A5C701E26714900B04EEF /* World.cpp in Sources */,
 				FCFD47F11E2FB7C60084EA18 /* GLES-Render.cpp in Sources */,
 				FCE688031E224E2400434C3D /* EventMgr.cpp in Sources */,
-				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				FCFD47FD1E3105B10084EA18 /* UIInputLayer.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				FCFD47F91E3104220084EA18 /* UIGameScene.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,13 +623,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5A5C7C1E269A3200B04EEF /* Actor.cpp in Sources */,
+				FCFD47FE1E3105B10084EA18 /* UIInputLayer.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				FCFD47FA1E3104220084EA18 /* UIGameScene.cpp in Sources */,
 				FC5A5C711E26714900B04EEF /* World.cpp in Sources */,
 				FCE688041E224E2400434C3D /* EventMgr.cpp in Sources */,
 				FC5A5C761E2696BF00B04EEF /* Unit.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				FC5A5C7E1E269A3200B04EEF /* GameScene.cpp in Sources */,
-				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

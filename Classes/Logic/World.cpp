@@ -2,7 +2,6 @@
 
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
-#include "EventMgr.h"
 
 const float InitGravity = -10.0f;
 const int VelocityIterations = 10;
@@ -19,7 +18,8 @@ World* World::create()
 }
 
 World::World()
-:_b2World(nullptr)
+: _b2World(nullptr)
+, _mainUnit(nullptr)
 {
     
 }
@@ -61,6 +61,9 @@ bool World::init()
     cocos2d::Scheduler* scheduler = cocos2d::Director::getInstance()->getScheduler();
     scheduler->schedule(CC_SCHEDULE_SELECTOR(World::pusher), this, 0, false);
     
+    REGISTER_EVENT(EventJoystick, onJoystick);
+    REGISTER_EVENT(EventButton, onButton);
+    
     return true;
 }
 
@@ -76,6 +79,8 @@ void World::createUnit(int ID)
     unit->retain();
     _units.push_back(unit);
     
+    _mainUnit = unit;
+    
     ECreateUnit params(unit);
     EventMgr::getInatence()->notify(params);
 }
@@ -83,6 +88,24 @@ void World::createUnit(int ID)
 void World::destroyUnit(int index)
 {
     
+}
+
+void World::onJoystick(EventParams &params)
+{
+    EJoystick joystick = static_cast<EJoystick&>(params);
+    //CCLOG("[World::onJoystick] angle : %f", joystick._angle);
+    
+    if (_mainUnit)
+        _mainUnit->move(joystick._angle);
+}
+
+void World::onButton(EventParams &params)
+{
+    EButton button = static_cast<EButton&>(params);
+    //CCLOG("[World::onButton] index : %d", button._index);
+    
+    if (_mainUnit)
+        _mainUnit->jump();
 }
 
 void World::pusher(float dt)

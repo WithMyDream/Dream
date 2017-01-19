@@ -13,7 +13,10 @@ Unit* Unit::create(World* world)
 }
 
 Unit::Unit()
-:_b2Body(nullptr)
+: _b2Body(nullptr)
+, _jumpAbility(b2Vec2(0.0f, 100.0f))
+, _currMoveForce(b2Vec2(0.0f, 0.0f))
+, _currDir(-1)
 {
     
 }
@@ -34,7 +37,7 @@ bool Unit::init(World* world)
     _b2Body->SetUserData(this);
     b2FixtureDef fixtureDef;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.2f;
+    fixtureDef.friction = 0.4f;
     fixtureDef.restitution = 0.8f;
     b2CircleShape circleShap;
     fixtureDef.shape = &circleShap;
@@ -62,6 +65,52 @@ void Unit::setAngle(float32 angle)
 float32 Unit::getAngle()
 {
     return _b2Body->GetAngle();
+}
+
+void Unit::move(float angle)
+{
+    int intAngle = (int)angle;
+    CCLOG("[Unit::move] angle : %f -> %d", angle, intAngle);
+    if (intAngle == -1)
+    {
+        b2Vec2 reverseForce = _currMoveForce;
+        reverseForce *= -1.0f;
+        _b2Body->ApplyForceToCenter(reverseForce, true);
+        _currMoveForce.SetZero();
+        _currDir = -1;
+        return;
+    }
+    
+    float dirAngle = intAngle + 45.0f;
+    int dir = (int)(dirAngle / 90.0f);
+    if (_currDir == dir)
+        return;
+    
+    if (dir == 1)       // up
+    {
+        
+    }
+    else if (dir == 2)  // left
+    {
+        _currMoveForce.x = -500.0f;
+    }
+    else if (dir == 3)  // down
+    {
+        
+    }
+    else                // right
+    {
+        _currMoveForce.x = 500.0f;
+    }
+
+    _b2Body->ApplyForceToCenter(_currMoveForce, true);
+    _currDir = dir;
+    
+}
+
+void Unit::jump()
+{
+    _b2Body->ApplyLinearImpulse(_jumpAbility, _b2Body->GetWorldCenter(), true);
 }
 
 void Unit::update(float dt)

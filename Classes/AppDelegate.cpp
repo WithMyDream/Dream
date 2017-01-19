@@ -1,8 +1,6 @@
 #include "AppDelegate.h"
 
-#include "Logic/World.h"
-#include "Logic/EventMgr.h"
-#include "View/GameScene.h"
+#include "GUI/UIGameScene.h"
 
 USING_NS_CC;
 
@@ -79,15 +77,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
     
-    World* world = World::create();
-    world->retain();
-    EventMgr::getInatence();
-    GameScene* scene = GameScene::create();
-    scene->setDebugDraw(world->getB2World());
-    director->runWithScene(scene);
-    
-    // test
-    world->createUnit(1);
+    director->runWithScene(UIGameScene::create());
 
     return true;
 }

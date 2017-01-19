@@ -4,6 +4,7 @@
 #include "base/CCRef.h"
 #include "Box2D/Box2D.h"
 #include "Unit.h"
+#include "EventMgr.h"
 #include <vector>
 
 extern const float B2SCALE;
@@ -25,6 +26,9 @@ public:
     void createUnit(int ID);
     void destroyUnit(int index);
     
+    void onJoystick(EventParams &params);
+    void onButton(EventParams &params);
+    
     void pusher(float dt);
 private:
     void update(float dt);
@@ -34,6 +38,7 @@ private:
     float       _gravity;
     
     std::vector<Unit*> _units;
+    Unit*       _mainUnit;
 };
 
 #endif // __World_H__

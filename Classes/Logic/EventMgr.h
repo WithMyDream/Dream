@@ -8,12 +8,11 @@
 #include "base/CCConsole.h"
 
 #define REGISTER_EVENT(eventType, classFunc) \
-    EventHandler handler = [this](EventParams& params) \
-    { \
-        CCLOG("EventHandler ~~~~ "); \
-        this->classFunc(params); \
-    }; \
-    EventMgr::getInatence()->registerEvent(eventType, handler); \
+    EventMgr::getInatence()->registerEvent(eventType, [this](EventParams& params) \
+        { \
+            this->classFunc(params); \
+        } \
+    ); \
 
 #define UNREGISTER_EVENT(handler) EventMgr::getInatence()->unregisterHandler(handler);
 
@@ -31,7 +30,7 @@ public:
     
     void registerEvent(EventType eventType, EventHandler handler);
     void unregisterHandler(EventHandler handler);
-    void unregisterEvent(EventType eventType);
+    void unregisterEventType(EventType eventType);
     
     void notify(EventParams &params);
 private:

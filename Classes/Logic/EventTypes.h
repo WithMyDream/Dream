@@ -3,9 +3,10 @@
 
 enum EventType
 {
-    EventNone           = -1,
-    EventCreateUnit     = 1,
-    EventMax            = 1,
+    EventCreateUnit = 0,
+    EventJoystick,
+    EventButton,
+    EventMax,
 };
 
 class EventParams
@@ -25,6 +26,26 @@ public:
     {};
     
     Unit* _unit;
+};
+
+class EJoystick : public EventParams
+{
+public:
+    EJoystick(float angle):EventParams(EventJoystick)
+    ,_angle(angle)
+    {};
+    
+    float _angle;
+};
+
+class EButton : public EventParams
+{
+public:
+    EButton(int index):EventParams(EventButton)
+    ,_index(index)
+    {};
+    
+    int _index;
 };
 
 #endif // __EventTypes_H__

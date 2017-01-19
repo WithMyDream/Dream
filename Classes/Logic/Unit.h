@@ -16,12 +16,15 @@ public:
     bool init(World* world);
     
     b2Body* getB2Body(){ return _b2Body; }
-    
+
     void setPosition(b2Vec2 &pos);
     const b2Vec2& getPostion();
     
     void setAngle(float32 angle);
     float32 getAngle();
+    
+    void move(float angle);
+    void jump();
     
     void update(float dt);
     
@@ -30,6 +33,10 @@ private:
     
 private:
     b2Body*     _b2Body;
+    
+    b2Vec2      _jumpAbility;
+    b2Vec2      _currMoveForce;
+    int         _currDir;
 };
 
 #endif // __Unit_H__

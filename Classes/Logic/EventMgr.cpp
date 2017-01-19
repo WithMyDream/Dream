@@ -34,7 +34,7 @@ EventMgr::~EventMgr()
 
 void EventMgr::init()
 {
-    _eventHandlers.resize(EventMax);
+    _eventHandlers.reserve(EventMax);
     for (int i=0; i<EventMax; ++i) {
         _eventHandlers.push_back(new std::list<EventHandler>());
     }
@@ -42,7 +42,9 @@ void EventMgr::init()
 
 void EventMgr::registerEvent(EventType eventType, EventHandler eventHandler)
 {
-    if (eventType > EventMax) {
+    CCLOG("[EventMgr::registerEvent] eventType %d ", eventType);
+    
+    if (eventType >= EventMax) {
         CCLOG("There is not this event %d", eventType);
         return;
     }
@@ -60,7 +62,7 @@ void EventMgr::unregisterHandler(EventHandler eventHandler)
 //    }
 }
 
-void EventMgr::unregisterEvent(EventType eventType)
+void EventMgr::unregisterEventType(EventType eventType)
 {
     _eventHandlers.at(eventType)->clear();
 }
