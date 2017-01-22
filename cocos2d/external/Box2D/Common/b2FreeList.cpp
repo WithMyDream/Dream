@@ -1,5 +1,4 @@
 /*
-* Copyright (c) 2011 Erin Catto http://box2d.org
 * Copyright (c) 2014 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
@@ -16,35 +15,43 @@
 * misrepresented as being the original software.
 * 3. This notice may not be removed or altered from any source distribution.
 */
-
-#ifndef B2_TIMER_H
-#define B2_TIMER_H
-
+#include <Box2D/Common/b2FreeList.h>
+#include <Box2D/Common/b2IntrusiveList.h>
 #include <Box2D/Common/b2Settings.h>
 
-/// Timer for profiling. This has platform specific code and may
-/// not work on every platform.
-class b2Timer
+/// Allocate an item from the freelist.
+b2IntrusiveListNode* b2FreeList::Allocate()
 {
-public:
+	if (m_free.IsEmpty()) return NULL;
+	b2IntrusiveListNode * const node = m_free.GetNext();
+	node->Remove();
+	m_allocated.InsertBefore(node);
+	return node;
+}
 
-	/// Constructor
-	b2Timer();
+void b2FreeList::Free(b2IntrusiveListNode* node)
+{
+	b2Assert(node);
+#if B2_FREE_LIST_CHECK_ALLOCATED_ON_FREE
+	b2Assert(m_allocated.FindNodeInList(node));
+#endif // B2_FREE_LIST_CHECK_ALLOCATED_ON_FREE
+	node->Remove();
+	m_free.InsertAfter(node);
+}
 
-	/// Reset the timer.
-	void Reset();
+void b2FreeList::AddToFreeList(b2IntrusiveListNode* node)
+{
+	b2Assert(node);
+	b2Assert(!node->InList());
+	m_free.InsertBefore(node);
+}
 
-	/// Get the time since construction or the last reset.
-	float32 GetMilliseconds() const;
-
-private:
-	/// Get platform specific tick count
-	static int64 GetTicks();
-
-#if defined(_WIN32)
-	static float64 s_invFrequency;
-#endif
-	int64 m_start;
-};
-
-#endif
+void b2FreeList::RemoveAll()
+{
+	while (!m_allocated.IsEmpty()) {
+		m_allocated.GetNext()->Remove();
+	}
+	while (!m_free.IsEmpty()) {
+		m_free.GetNext()->Remove();
+	}
+}

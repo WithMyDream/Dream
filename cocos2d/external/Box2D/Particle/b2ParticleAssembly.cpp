@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2006-2009 Erin Catto http://www.box2d.org
+* Copyright (c) 2013 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
 * warranty.  In no event will the authors be held liable for any damages
@@ -15,41 +15,23 @@
 * misrepresented as being the original software.
 * 3. This notice may not be removed or altered from any source distribution.
 */
+#include <Box2D/Particle/b2ParticleAssembly.h>
+#include <Box2D/Particle/b2ParticleSystem.h>
 
-#ifndef B2_CONTACT_MANAGER_H
-#define B2_CONTACT_MANAGER_H
+extern "C" {
 
-#include <Box2D/Collision/b2BroadPhase.h>
-
-class b2Contact;
-class b2ContactFilter;
-class b2ContactListener;
-class b2BlockAllocator;
-class b2ParticleSystem;
-
-// Delegate of b2World.
-class b2ContactManager
+// Helper function, called from assembly routine.
+void GrowParticleContactBuffer(
+	b2GrowableBuffer<b2ParticleContact>& contacts)
 {
-public:
-	friend class b2ParticleSystem;
+	// Set contacts.count = capacity instead of count because there are
+	// items past the end of the array waiting to be post-processed.
+	// We must maintain the entire contacts array.
+	// TODO: It would be better to have the items awaiting post-processing
+	// in their own array on the stack.
+	contacts.SetCount(contacts.GetCapacity());
+	contacts.Grow();
+}
 
-	b2ContactManager();
+} // extern "C"
 
-	// Broad-phase callback.
-	void AddPair(void* proxyUserDataA, void* proxyUserDataB);
-
-	void FindNewContacts();
-
-	void Destroy(b2Contact* c);
-
-	void Collide();
-            
-	b2BroadPhase m_broadPhase;
-	b2Contact* m_contactList;
-	int32 m_contactCount;
-	b2ContactFilter* m_contactFilter;
-	b2ContactListener* m_contactListener;
-	b2BlockAllocator* m_allocator;
-};
-
-#endif

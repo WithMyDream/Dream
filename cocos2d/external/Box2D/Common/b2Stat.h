@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2006-2009 Erin Catto http://www.box2d.org
+* Copyright (c) 2013 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
 * warranty.  In no event will the authors be held liable for any damages
@@ -15,41 +15,43 @@
 * misrepresented as being the original software.
 * 3. This notice may not be removed or altered from any source distribution.
 */
+#ifndef B2_STAT
+#define B2_STAT
 
-#ifndef B2_CONTACT_MANAGER_H
-#define B2_CONTACT_MANAGER_H
+#include <Box2D/Common/b2Settings.h>
 
-#include <Box2D/Collision/b2BroadPhase.h>
-
-class b2Contact;
-class b2ContactFilter;
-class b2ContactListener;
-class b2BlockAllocator;
-class b2ParticleSystem;
-
-// Delegate of b2World.
-class b2ContactManager
+/// Calculates min/max/mean of a set of samples
+class b2Stat
 {
 public:
-	friend class b2ParticleSystem;
+	b2Stat();
 
-	b2ContactManager();
+	/// Record a sample
+	void Record( float32 t );
 
-	// Broad-phase callback.
-	void AddPair(void* proxyUserDataA, void* proxyUserDataB);
+	/// Returns the number of recorded samples
+	int GetCount() const;
 
-	void FindNewContacts();
+	/// Returns the mean of all recorded samples,
+	/// Returns 0 if there are no recorded samples
+	float32 GetMean() const;
 
-	void Destroy(b2Contact* c);
+	/// Returns the min of all recorded samples,
+	/// FLT_MAX if there are no recorded samples
+	float32 GetMin() const;
 
-	void Collide();
-            
-	b2BroadPhase m_broadPhase;
-	b2Contact* m_contactList;
-	int32 m_contactCount;
-	b2ContactFilter* m_contactFilter;
-	b2ContactListener* m_contactListener;
-	b2BlockAllocator* m_allocator;
+	/// Returns the max of all recorded samples,
+	/// -FLT_MAX if there are no recorded samples
+	float32 GetMax() const;
+
+	/// Erase all recorded samples
+	void Clear();
+private:
+
+	int m_count;
+	float64 m_total;
+	float32 m_min;
+	float32 m_max;
 };
 
 #endif

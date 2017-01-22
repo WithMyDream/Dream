@@ -1,5 +1,4 @@
 /*
-* Copyright (c) 2006-2011 Erin Catto http://www.box2d.org
 * Copyright (c) 2014 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
@@ -16,57 +15,49 @@
 * misrepresented as being the original software.
 * 3. This notice may not be removed or altered from any source distribution.
 */
+#ifndef B2_PARTICLE_ASSEMBLY_H
+#define B2_PARTICLE_ASSEMBLY_H
 
-#ifndef B2_TIME_STEP_H
-#define B2_TIME_STEP_H
-
+#include <Box2D/Common/b2GrowableBuffer.h>
 #include <Box2D/Common/b2Math.h>
 
-/// Profiling data. Times are in milliseconds.
-struct b2Profile
+
+struct b2ParticleContact;
+
+struct FindContactCheck
 {
-	float32 step;
-	float32 collide;
-	float32 solve;
-	float32 solveInit;
-	float32 solveVelocity;
-	float32 solvePosition;
-	float32 broadphase;
-	float32 solveTOI;
+    uint16 particleIndex;
+    uint16 comparatorIndex;
 };
 
-/// This is an internal structure.
-struct b2TimeStep
+struct FindContactInput
 {
-	float32 dt;			// time step
-	float32 inv_dt;		// inverse time step (0 if dt == 0).
-	float32 dtRatio;	// dt * inv_dt0
-	int32 velocityIterations;
-	int32 positionIterations;
-	int32 particleIterations;
-	bool warmStarting;
+    uint32 proxyIndex;
+    b2Vec2 position;
 };
 
-/// This is an internal structure.
-struct b2Position
-{
-	b2Vec2 c;
-	float32 a;
-};
+enum { NUM_V32_SLOTS = 4 };
 
-/// This is an internal structure.
-struct b2Velocity
-{
-	b2Vec2 v;
-	float32 w;
-};
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/// Solver Data
-struct b2SolverData
-{
-	b2TimeStep step;
-	b2Position* positions;
-	b2Velocity* velocities;
-};
+extern int CalculateTags_Simd(const b2Vec2* positions,
+                              int count,
+                              const float& inverseDiameter,
+                              uint32* outTags);
+
+extern void FindContactsFromChecks_Simd(
+	const FindContactInput* reordered,
+	const FindContactCheck* checks,
+	int numChecks,
+  const float& particleDiameterSq,
+  const float& particleDiameterInv,
+  const uint32* flags,
+	b2GrowableBuffer<b2ParticleContact>& contacts);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif
