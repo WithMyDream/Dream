@@ -18,8 +18,8 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef RENDER_H
-#define RENDER_H
+#ifndef __GLESDEBUGDRAW_H
+#define __GLESDEBUGDRAW_H
 
 #include "Box2D/Box2D.h"
 #include "cocos2d.h"
@@ -30,11 +30,6 @@ struct b2AABB;
 // inside b2World::Step.
 class GLESDebugDraw : public b2Draw
 {
-    float32 mRatio;
-    cocos2d::GLProgram* mShaderProgram;
-    GLint        mColorLocation;
-
-    void initShader( void );
 public:
     GLESDebugDraw();
 
@@ -42,11 +37,15 @@ public:
 
     virtual void DrawPolygon(const b2Vec2* vertices, int vertexCount, const b2Color& color);
 
+    virtual void DrawFlatPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
+
     virtual void DrawSolidPolygon(const b2Vec2* vertices, int vertexCount, const b2Color& color);
 
     virtual void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);
 
     virtual void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color);
+
+    virtual void DrawParticles(const b2Vec2 *centers, float32 radius, const b2ParticleColor *colors, int32 count);
 
     virtual void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
 
@@ -57,7 +56,17 @@ public:
     virtual void DrawString(int x, int y, const char* string, ...); 
 
     virtual void DrawAABB(b2AABB* aabb, const b2Color& color);
+
+    void setRatio(float32 ratio) { mRatio = ratio; }
+
+protected:
+    float32 mRatio;
+    cocos2d::GLProgram* mShaderProgram;
+    GLint        mPointSizeLocation;
+    GLint        mColorLocation;
+
+    void initShader( void );
 };
 
 
-#endif
+#endif //__GLESDEBUGDRAW_H
