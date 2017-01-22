@@ -156,4 +156,36 @@ tests/lua-empty-test/project/proj.tizen/res/
 tests/lua-tests/project/proj.tizen/res/
 
 #cocos2d lib
-cocos2d/
+/cocos2d/*
+!/cocos2d/external/
+/cocos2d/external/ConvertUTF
+/cocos2d/external/bullet
+/cocos2d/external/chipmunk
+/cocos2d/external/clipper
+/cocos2d/external/config.json
+/cocos2d/external/curl
+/cocos2d/external/edtaa3func
+/cocos2d/external/flatbuffers
+/cocos2d/external/freetype2
+/cocos2d/external/glfw3
+/cocos2d/external/jpeg
+/cocos2d/external/json
+/cocos2d/external/linux-specific
+/cocos2d/external/png
+/cocos2d/external/poly2tri
+/cocos2d/external/rapidxml
+/cocos2d/external/recast
+/cocos2d/external/sqlite3
+/cocos2d/external/tiff
+/cocos2d/external/tinyxml2
+/cocos2d/external/unzip
+/cocos2d/external/version.json
+/cocos2d/external/webp
+/cocos2d/external/websockets
+/cocos2d/external/win10-specific
+/cocos2d/external/win32-specific
+/cocos2d/external/winrt_8.1-specific
+/cocos2d/external/wp_8.1-specific
+/cocos2d/external/xxhash
+/cocos2d/external/xxtea
+/cocos2d/external/zlib
