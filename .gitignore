@@ -189,3 +189,6 @@ tests/lua-tests/project/proj.tizen/res/
 /cocos2d/external/xxhash
 /cocos2d/external/xxtea
 /cocos2d/external/zlib
+
+#cocos2d lib project files
+!/cocos2d/build/
