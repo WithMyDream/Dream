@@ -68,6 +68,7 @@ bool B2DebugDrawLayer::init()
   flags += b2Draw::e_aabbBit;
   flags += b2Draw::e_pairBit;
   flags += b2Draw::e_centerOfMassBit;
+  flags += b2Draw::e_particleBit;
   mB2DebugDraw->SetFlags(flags);
   
   return true;

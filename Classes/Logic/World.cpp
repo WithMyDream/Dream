@@ -58,6 +58,23 @@ bool World::init()
     edgeShap.Set(b2Vec2(0.0f, winSize.height/B2SCALE), b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
     body->CreateFixture(&fixtureDef);
     
+    
+    // test particle system
+    b2ParticleSystemDef particleSystemDef;
+    m_particleSystem = _b2World->CreateParticleSystem(&particleSystemDef);
+    m_particleSystem->SetGravityScale(0.4f);
+    m_particleSystem->SetDensity(1.2f);
+    m_particleSystem->SetRadius(3.0f/B2SCALE);
+    b2ParticleGroupDef pd;
+    b2CircleShape shape;
+    shape.m_p.Set(winSize.width/2.0f/B2SCALE, winSize.height/2.0f/B2SCALE);
+    shape.m_radius = 50.0f/B2SCALE;
+    pd.flags = b2_elasticParticle;
+    pd.groupFlags = b2_solidParticleGroup;
+    pd.shape = &shape;
+    pd.color.Set(255, 0, 0, 255);
+    m_particleSystem->CreateParticleGroup(pd);
+    
     cocos2d::Scheduler* scheduler = cocos2d::Director::getInstance()->getScheduler();
     scheduler->schedule(CC_SCHEDULE_SELECTOR(World::pusher), this, 0, false);
     
@@ -95,8 +112,11 @@ void World::onJoystick(EventParams &params)
     EJoystick joystick = static_cast<EJoystick&>(params);
     //CCLOG("[World::onJoystick] angle : %f", joystick._angle);
     
-    if (_mainUnit)
-        _mainUnit->move(joystick._angle);
+    //if (_mainUnit)
+        //_mainUnit->move(joystick._angle);
+    
+    m_particleSystem->GetParticleGroupList()->ApplyLinearImpulse(b2Vec2(0, 10.0f));
+    
 }
 
 void World::onButton(EventParams &params)

@@ -32,7 +32,7 @@ bool Unit::init(World* world)
     
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = b2Vec2(winSize.width/2.0f/B2SCALE, winSize.height/2.0f/B2SCALE);
+    bodyDef.position = b2Vec2((winSize.width/2.0f-200)/B2SCALE, winSize.height/2.0f/B2SCALE);
     _b2Body = world->getB2World()->CreateBody(&bodyDef);
     _b2Body->SetUserData(this);
     b2FixtureDef fixtureDef;

@@ -39,6 +39,8 @@ private:
     
     std::vector<Unit*> _units;
     Unit*       _mainUnit;
+    
+    b2ParticleSystem* m_particleSystem;
 };
 
 #endif // __World_H__
