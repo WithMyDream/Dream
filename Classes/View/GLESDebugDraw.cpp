@@ -228,7 +228,7 @@ void GLESDebugDraw::DrawParticles(const b2Vec2 *centers_old, float32 radius, con
      glEnable(GL_POINT_SPRITE);
      glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
      */
-    const float particle_size_multiplier = 8;  // no falloff
+    const float particle_size_multiplier = 1;  // no falloff
     const float global_alpha = 0.35f;  // instead of texture
 
     mShaderProgram->setUniformLocationWith1f(mPointSizeLocation, radius * mRatio * particle_size_multiplier);

@@ -4,6 +4,10 @@
 #include "cocos2d.h"
 #include "UIInputLayer.h"
 
+#include "../Logic/World.h"
+#include "../Logic/EventMgr.h"
+#include "../View/GameScene.h"
+
 using namespace cocos2d;
 
 class UIGameScene : public Scene
@@ -16,7 +20,10 @@ public:
     bool init() override;
     
 private:
-    UIInputLayer* _joystick;
+    World*          _world;
+    GameScene*      _scene;
+    
+    UIInputLayer*   _joystick;
 };
 
 #endif // __UIGameScene_H__

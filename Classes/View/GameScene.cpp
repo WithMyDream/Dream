@@ -22,9 +22,10 @@ GameScene::~GameScene()
 
 bool GameScene::init()
 {
-    Scene::init();
+    Node::init();
     
     REGISTER_EVENT(EventCreateUnit, onCreateUnit);
+    REGISTER_EVENT(EventJoystick, onJoystick);
     
     scheduleUpdate();
     
@@ -46,12 +47,25 @@ void GameScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 void GameScene::onCreateUnit(EventParams &params)
 {
     ECreateUnit create = static_cast<ECreateUnit&>(params);
-    CCLOG("[onCreateUnit] %08x ", create._unit);
+    //CCLOG("[onCreateUnit] %08x ", create._unit);
     Actor* actor = Actor::create();
     actor->setUnit(create._unit);
     actor->setLocalZOrder(-1);
     addChild(actor);
     _actors.push_back(actor);
+    
+    runAction(Follow::create(actor));
+}
+
+void GameScene::onJoystick(EventParams &params)
+{
+    EJoystick joystick = static_cast<EJoystick&>(params);
+    //CCLOG("angle %f", joystick._angle);
+    if (joystick._angle == -1) {
+        return;
+    }
+    float r = CC_DEGREES_TO_RADIANS(joystick._angle);
+    setPosition(getPositionX() + 10*cosf(r), getPositionY() + 10*sinf(r));
 }
 
 void GameScene::update(float dt)

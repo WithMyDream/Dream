@@ -1,9 +1,5 @@
 #include "UIGameScene.h"
 
-#include "../Logic/World.h"
-#include "../Logic/EventMgr.h"
-#include "../View/GameScene.h"
-
 UIGameScene::UIGameScene()
 : _joystick(nullptr)
 {
@@ -12,7 +8,7 @@ UIGameScene::UIGameScene()
 
 UIGameScene::~UIGameScene()
 {
-    
+    CC_SAFE_DELETE(_world);
 }
 
 bool UIGameScene::init()
@@ -20,17 +16,18 @@ bool UIGameScene::init()
     Scene::init();
     
     EventMgr::getInatence();
-    World* world = World::create();
-    world->retain();
-    GameScene* scene = GameScene::create();
-    scene->setDebugDraw(world->getB2World());
-    addChild(scene);
+    _world = World::create();
+    _world->retain();
+    _scene = GameScene::create();
+    _scene->setDebugDraw(_world->getB2World());
+    addChild(_scene);
     
     _joystick = UIInputLayer::create();
     addChild(_joystick);
     
     // test
-    world->createUnit(1);
+    _world->loadWorldTMX("Map/map001.tmx");
+    _world->setMainUnit(_world->createUnit(1));
     
     return true;
 }

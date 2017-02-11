@@ -9,12 +9,13 @@ class World;
 class Unit : public cocos2d::Ref
 {
 public:
-    static Unit* create(World* world);
+    static Unit* create(World* world, int ID);
     
     Unit();
     ~Unit();
-    bool init(World* world);
+    bool init(World* world, int ID);
     
+    void createB2Body();
     b2Body* getB2Body(){ return _b2Body; }
 
     void setPosition(b2Vec2 &pos);
@@ -29,12 +30,22 @@ public:
     void update(float dt);
     
 private:
-    
+    void _move();
     
 private:
+    World*      _world; // weak ref
     b2Body*     _b2Body;
     
-    b2Vec2      _jumpAbility;
+    int         _ID;
+    
+    float       _delta;
+    
+    // jump
+    b2Vec2      _jumpImpulseMax;
+    
+    // move
+    float       _moveVxMax;
+    float       _moveAngle;
     b2Vec2      _currMoveForce;
     int         _currDir;
 };

@@ -3,18 +3,20 @@
 #include "World.h"
 #include "base/CCDirector.h"
 
-Unit* Unit::create(World* world)
+Unit* Unit::create(World* world, int ID)
 {
     Unit* unit = new Unit();
-    if (unit && unit->init(world)) {
+    if (unit && unit->init(world, ID))
         unit->autorelease();
-    }
     return unit;
 }
 
 Unit::Unit()
-: _b2Body(nullptr)
-, _jumpAbility(b2Vec2(0.0f, 100.0f))
+: _world(nullptr)
+, _b2Body(nullptr)
+, _ID(-1)
+, _jumpImpulseMax(b2Vec2(0.0f, 100.0f))
+, _moveVxMax(5.0f)
 , _currMoveForce(b2Vec2(0.0f, 0.0f))
 , _currDir(-1)
 {
@@ -26,25 +28,41 @@ Unit::~Unit()
     
 }
 
-bool Unit::init(World* world)
+bool Unit::init(World* world, int ID)
 {
-    cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    _world = world;
+    _ID = ID;
+    
+    createB2Body();
+    
+    return true;
+}
+
+void Unit::createB2Body()
+{
+    if (!_world)
+        return;
     
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position = b2Vec2((winSize.width/2.0f-200)/B2SCALE, winSize.height/2.0f/B2SCALE);
-    _b2Body = world->getB2World()->CreateBody(&bodyDef);
+    bodyDef.position = b2Vec2_zero;
+    _b2Body = _world->getB2World()->CreateBody(&bodyDef);
     _b2Body->SetUserData(this);
-    b2FixtureDef fixtureDef;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.4f;
-    fixtureDef.restitution = 0.8f;
-    b2CircleShape circleShap;
-    fixtureDef.shape = &circleShap;
-    circleShap.m_radius = 50.0f/B2SCALE;
-    _b2Body->CreateFixture(&fixtureDef);
     
-    return true;
+    if (_ID != -1)
+    {
+        cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+        _b2Body->SetTransform(b2Vec2(winSize.width/2.0f/B2SCALE, winSize.height/2.0f/B2SCALE), _b2Body->GetAngle());
+        
+        b2FixtureDef fixtureDef;
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.8f;
+        fixtureDef.restitution = 0.0f;
+        b2CircleShape circleShape;
+        circleShape.m_radius = 50.0f/B2SCALE;
+        fixtureDef.shape = &circleShape;
+        _b2Body->CreateFixture(&fixtureDef);
+    }
 }
 
 void Unit::setPosition(b2Vec2 &pos)
@@ -69,14 +87,12 @@ float32 Unit::getAngle()
 
 void Unit::move(float angle)
 {
+    _moveAngle = angle;
+    
     int intAngle = (int)angle;
     CCLOG("[Unit::move] angle : %f -> %d", angle, intAngle);
     if (intAngle == -1)
     {
-        b2Vec2 reverseForce = _currMoveForce;
-        reverseForce *= -1.0f;
-        _b2Body->ApplyForceToCenter(reverseForce, true);
-        _currMoveForce.SetZero();
         _currDir = -1;
         return;
     }
@@ -86,34 +102,48 @@ void Unit::move(float angle)
     if (_currDir == dir)
         return;
     
-    if (dir == 1)       // up
-    {
-        
-    }
-    else if (dir == 2)  // left
-    {
-        _currMoveForce.x = -500.0f;
-    }
-    else if (dir == 3)  // down
-    {
-        
-    }
-    else                // right
-    {
-        _currMoveForce.x = 500.0f;
-    }
-
-    _b2Body->ApplyForceToCenter(_currMoveForce, true);
     _currDir = dir;
     
 }
 
 void Unit::jump()
 {
-    _b2Body->ApplyLinearImpulse(_jumpAbility, _b2Body->GetWorldCenter(), true);
+    _b2Body->ApplyLinearImpulse(_jumpImpulseMax, _b2Body->GetWorldCenter(), true);
+}
+
+void Unit::_move()
+{
+    if (_currDir == -1)
+        return;
+    
+    const b2Vec2& currV = _b2Body->GetLinearVelocity();
+    float expectedVx = 0;
+    
+    if (_currDir == 1)       // up
+    {
+        
+    }
+    else if (_currDir == 2)  // left
+    {
+        expectedVx = -_moveVxMax;
+    }
+    else if (_currDir == 3)  // down
+    {
+        
+    }
+    else                // right
+    {
+        expectedVx = _moveVxMax;
+    }
+    
+    float changeVx = expectedVx - currV.x;
+    _currMoveForce.x = _b2Body->GetMass() * changeVx / _delta;
+    _b2Body->ApplyForceToCenter(_currMoveForce, true);
 }
 
 void Unit::update(float dt)
 {
+    _delta = dt;
     
+    _move();
 }

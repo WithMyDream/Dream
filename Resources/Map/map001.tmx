@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="200" height="20" tilewidth="32" tileheight="32" nextobjectid="34">
+ <tileset firstgid="1" name="map001" tilewidth="32" tileheight="32" tilecount="240" columns="20">
+  <image source="map001.png" width="640" height="400"/>
+ </tileset>
+ <layer name="view" width="200" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztyUENAAAIA7Hh3zQGCAbWJve6BAAAAAAAAAAAAAAAAAAAeszR96SmFnKLAMc=
+  </data>
+ </layer>
+ <objectgroup name="logic">
+  <object id="18" name="ground" type="box" x="-27.2727" y="608.111" width="187.383" height="32.5556"/>
+  <object id="20" name="ground" type="box" x="223.944" y="607.722" width="6209.69" height="32.5556"/>
+  <object id="21" name="barrier" type="edge" x="381" y="555">
+   <polyline points="-10,-41 78,-148 104,-93 69,-19 -35,60"/>
+  </object>
+  <object id="22" name="saw" type="circle" x="240" y="270" width="89" height="89">
+   <ellipse/>
+  </object>
+  <object id="23" name="frame" type="edge" x="2" y="3">
+   <polyline points="-2,-3 -2,733 6398,733 6398,-3 -2,-3"/>
+  </object>
+ </objectgroup>
+</map>

@@ -9,7 +9,7 @@
 
 using namespace cocos2d;
 
-class GameScene : public Scene
+class GameScene : public Node
 {
 public:
     static GameScene* create();
@@ -23,6 +23,7 @@ public:
     void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
     
     void onCreateUnit(EventParams &params);
+    void onJoystick(EventParams &params);
     
     void update(float dt) override;
     
