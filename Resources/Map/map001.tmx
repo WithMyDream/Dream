@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="200" height="20" tilewidth="32" tileheight="32" nextobjectid="34">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="200" height="20" tilewidth="32" tileheight="32" nextobjectid="41">
  <tileset firstgid="1" name="map001" tilewidth="32" tileheight="32" tilecount="240" columns="20">
   <image source="map001.png" width="640" height="400"/>
  </tileset>
@@ -11,7 +11,7 @@
  <objectgroup name="logic">
   <object id="18" name="ground" type="box" x="-27.2727" y="608.111" width="187.383" height="32.5556"/>
   <object id="20" name="ground" type="box" x="223.944" y="607.722" width="6209.69" height="32.5556"/>
-  <object id="21" name="barrier" type="edge" x="381" y="555">
+  <object id="21" name="barrier" type="edge" x="884" y="555">
    <polyline points="-10,-41 78,-148 104,-93 69,-19 -35,60"/>
   </object>
   <object id="22" name="saw" type="circle" x="240" y="270" width="89" height="89">
@@ -20,5 +20,11 @@
   <object id="23" name="frame" type="edge" x="2" y="3">
    <polyline points="-2,-3 -2,733 6398,733 6398,-3 -2,-3"/>
   </object>
+  <object id="34" name="joint1" type="box" x="500" y="-5" width="10" height="10"/>
+  <object id="36" name="joint" type="box" x="700" y="-5" width="10" height="10"/>
+  <object id="37" name="joint" type="box" x="900" y="-5" width="10" height="10"/>
+  <object id="38" name="joint" type="box" x="1100" y="-5" width="10" height="10"/>
+  <object id="39" name="joint" type="box" x="1300" y="-5" width="10" height="10"/>
+  <object id="40" name="joint" type="box" x="1500" y="-5" width="10" height="10"/>
  </objectgroup>
 </map>

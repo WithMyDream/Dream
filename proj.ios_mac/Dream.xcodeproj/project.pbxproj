@@ -78,6 +78,7 @@
 		FC5A5C7C1E269A3200B04EEF /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5A5C771E269A3200B04EEF /* Actor.cpp */; };
 		FC5A5C7D1E269A3200B04EEF /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5A5C791E269A3200B04EEF /* GameScene.cpp */; };
 		FC5A5C7E1E269A3200B04EEF /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5A5C791E269A3200B04EEF /* GameScene.cpp */; };
+		FCC75D581E5B4B810056A5F5 /* Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCC75D561E5B4B810056A5F5 /* Rope.cpp */; };
 		FCE687F81E223AEC00434C3D /* Logic in Resources */ = {isa = PBXBuildFile; fileRef = FCE687F71E223AEC00434C3D /* Logic */; };
 		FCE687FB1E223B1200434C3D /* View in Resources */ = {isa = PBXBuildFile; fileRef = FCE687FA1E223B1200434C3D /* View */; };
 		FCE688031E224E2400434C3D /* EventMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE688001E224E2400434C3D /* EventMgr.cpp */; };
@@ -200,6 +201,8 @@
 		FC5A5C781E269A3200B04EEF /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actor.h; sourceTree = "<group>"; };
 		FC5A5C791E269A3200B04EEF /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		FC5A5C7A1E269A3200B04EEF /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		FCC75D561E5B4B810056A5F5 /* Rope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rope.cpp; sourceTree = "<group>"; };
+		FCC75D571E5B4B810056A5F5 /* Rope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rope.h; sourceTree = "<group>"; };
 		FCE687F71E223AEC00434C3D /* Logic */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Logic; path = /Users/Jon/Documents/Project/Dream/Classes/Logic; sourceTree = "<absolute>"; };
 		FCE687FA1E223B1200434C3D /* View */ = {isa = PBXFileReference; lastKnownFileType = folder; name = View; path = /Users/Jon/Documents/Project/Dream/Classes/View; sourceTree = "<absolute>"; };
 		FCE688001E224E2400434C3D /* EventMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventMgr.cpp; sourceTree = "<group>"; };
@@ -416,6 +419,8 @@
 				FCE688001E224E2400434C3D /* EventMgr.cpp */,
 				FCE688011E224E2400434C3D /* EventMgr.h */,
 				FCE688091E22508800434C3D /* EventTypes.h */,
+				FCC75D561E5B4B810056A5F5 /* Rope.cpp */,
+				FCC75D571E5B4B810056A5F5 /* Rope.h */,
 				FC5A5C731E2696BF00B04EEF /* Unit.cpp */,
 				FC5A5C741E2696BF00B04EEF /* Unit.h */,
 				FC5A5C6E1E26714900B04EEF /* World.cpp */,
@@ -610,6 +615,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5A5C7D1E269A3200B04EEF /* GameScene.cpp in Sources */,
+				FCC75D581E5B4B810056A5F5 /* Rope.cpp in Sources */,
 				FC5A5C7B1E269A3200B04EEF /* Actor.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				FCFD47F51E2FC0F90084EA18 /* B2DebugDrawLayer.cpp in Sources */,

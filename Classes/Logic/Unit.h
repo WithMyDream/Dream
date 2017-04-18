@@ -13,26 +13,26 @@ public:
     
     Unit();
     ~Unit();
-    bool init(World* world, int ID);
+    virtual bool init(World* world, int ID);
     
-    void createB2Body();
-    b2Body* getB2Body(){ return _b2Body; }
+    virtual void initB2Body();
+    virtual b2Body* getB2Body(){ return _b2Body; }
 
-    void setPosition(b2Vec2 &pos);
-    const b2Vec2& getPostion();
+    virtual void setPosition(b2Vec2 &pos);
+    virtual const b2Vec2& getPostion();
     
-    void setAngle(float32 angle);
-    float32 getAngle();
+    virtual void setAngle(float32 angle);
+    virtual float32 getAngle();
     
     void move(float angle);
     void jump();
     
-    void update(float dt);
+    virtual void update(float dt);
     
-private:
+protected:
     void _move();
     
-private:
+protected:
     World*      _world; // weak ref
     b2Body*     _b2Body;
     

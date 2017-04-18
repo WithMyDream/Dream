@@ -33,12 +33,12 @@ bool Unit::init(World* world, int ID)
     _world = world;
     _ID = ID;
     
-    createB2Body();
+    initB2Body();
     
     return true;
 }
 
-void Unit::createB2Body()
+void Unit::initB2Body()
 {
     if (!_world)
         return;

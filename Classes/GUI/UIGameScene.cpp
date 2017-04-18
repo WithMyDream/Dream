@@ -29,6 +29,12 @@ bool UIGameScene::init()
     _world->loadWorldTMX("Map/map001.tmx");
     _world->setMainUnit(_world->createUnit(1));
     
+    // test rope
+    Rope* rope = Rope::create(_world, 1);
+    rope->jointFirstTo(_world->joint1);
+    rope->jointLastTo(_world->getMainUnit());
+    
+    
     return true;
 }
 

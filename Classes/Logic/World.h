@@ -4,6 +4,7 @@
 #include "base/CCRef.h"
 #include "Box2D/Box2D.h"
 #include "Unit.h"
+#include "Rope.h"
 #include "EventMgr.h"
 #include <vector>
 
@@ -28,12 +29,17 @@ public:
     void loadWorldTMX(const std::string& tmxPath);
     
     Unit* createUnit(int ID);
+    Unit* createRope(int ID);
     void destroyUnit(int index);
     
     void setMainUnit(Unit* unit){ _mainUnit = unit; }
+    Unit* getMainUnit(){ return _mainUnit; }
     
     void onJoystick(EventParams &params);
     void onButton(EventParams &params);
+    
+    // test
+    Unit* joint1;
     
 private:
     void pusher(float dt);

@@ -150,6 +150,11 @@ void World::loadWorldTMX(const std::string& tmxPath)
             polygon.SetAsBox(width/2.0f/B2SCALE, height/2.0f/B2SCALE);
             fixtureDef.shape = &polygon;
             b2body->CreateFixture(&fixtureDef);
+            
+            if ("joint1" == name)
+            {
+                joint1 = unit;
+            }
              
         }
         else if ("edge" == type)
@@ -203,6 +208,22 @@ Unit* World::createUnit(int ID)
     }
     
     return unit;
+}
+
+Unit* World::createRope(int ID)
+{
+    Rope* rope = Rope::create(this, ID);
+    
+    rope->retain();
+    _units.push_back(rope);
+    
+    if (ID != -1)
+    {
+        ECreateUnit params(rope);
+        EventMgr::getInatence()->notify(params);
+    }
+    
+    return rope;
 }
 
 void World::destroyUnit(int index)
