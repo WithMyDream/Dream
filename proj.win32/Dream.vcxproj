@@ -145,23 +145,31 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\GUI\UIGameScene.cpp" />
+    <ClCompile Include="..\Classes\GUI\UIInputLayer.cpp" />
     <ClCompile Include="..\Classes\Logic\EventMgr.cpp" />
+    <ClCompile Include="..\Classes\Logic\Rope.cpp" />
     <ClCompile Include="..\Classes\Logic\Unit.cpp" />
     <ClCompile Include="..\Classes\Logic\World.cpp" />
     <ClCompile Include="..\Classes\View\Actor.cpp" />
+    <ClCompile Include="..\Classes\View\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\View\GameScene.cpp" />
+    <ClCompile Include="..\Classes\View\GLESDebugDraw.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\GUI\UIGameScene.h" />
+    <ClInclude Include="..\Classes\GUI\UIInputLayer.h" />
     <ClInclude Include="..\Classes\Logic\EventMgr.h" />
     <ClInclude Include="..\Classes\Logic\EventTypes.h" />
+    <ClInclude Include="..\Classes\Logic\Rope.h" />
     <ClInclude Include="..\Classes\Logic\Unit.h" />
     <ClInclude Include="..\Classes\Logic\World.h" />
     <ClInclude Include="..\Classes\View\Actor.h" />
+    <ClInclude Include="..\Classes\View\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\View\GameScene.h" />
+    <ClInclude Include="..\Classes\View\GLESDebugDraw.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

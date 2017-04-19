@@ -16,15 +16,15 @@
     <Filter Include="src\View">
       <UniqueIdentifier>{91a775be-f5fd-48e4-8f56-27b39f34fde3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\GUI">
+      <UniqueIdentifier>{0e7b95e3-3422-4ca6-9f4a-e8d2dc30806d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Logic\EventMgr.cpp">
@@ -42,15 +42,27 @@
     <ClCompile Include="..\Classes\View\GameScene.cpp">
       <Filter>src\View</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GUI\UIGameScene.cpp">
+      <Filter>src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GUI\UIInputLayer.cpp">
+      <Filter>src\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Logic\Rope.cpp">
+      <Filter>src\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\View\B2DebugDrawLayer.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\View\GLESDebugDraw.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Logic\EventMgr.h">
@@ -69,6 +81,21 @@
       <Filter>src\View</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\View\GameScene.h">
+      <Filter>src\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GUI\UIGameScene.h">
+      <Filter>src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GUI\UIInputLayer.h">
+      <Filter>src\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Logic\Rope.h">
+      <Filter>src\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View\B2DebugDrawLayer.h">
+      <Filter>src\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View\GLESDebugDraw.h">
       <Filter>src\View</Filter>
     </ClInclude>
   </ItemGroup>

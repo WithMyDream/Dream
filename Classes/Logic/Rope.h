@@ -2,6 +2,7 @@
 #define __Rope_H__
 
 #include "Unit.h"
+#include <vector>
 
 class Rope : public Unit
 {

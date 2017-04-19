@@ -25,10 +25,13 @@
     <ClCompile Include="..\Collision\Shapes\b2PolygonShape.cpp" />
     <ClCompile Include="..\Common\b2BlockAllocator.cpp" />
     <ClCompile Include="..\Common\b2Draw.cpp" />
+    <ClCompile Include="..\Common\b2FreeList.cpp" />
     <ClCompile Include="..\Common\b2Math.cpp" />
     <ClCompile Include="..\Common\b2Settings.cpp" />
     <ClCompile Include="..\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="..\Common\b2Stat.cpp" />
     <ClCompile Include="..\Common\b2Timer.cpp" />
+    <ClCompile Include="..\Common\b2TrackedBlock.cpp" />
     <ClCompile Include="..\Dynamics\b2Body.cpp" />
     <ClCompile Include="..\Dynamics\b2ContactManager.cpp" />
     <ClCompile Include="..\Dynamics\b2Fixture.cpp" />
@@ -56,6 +59,11 @@
     <ClCompile Include="..\Dynamics\Joints\b2RopeJoint.cpp" />
     <ClCompile Include="..\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="..\Dynamics\Joints\b2WheelJoint.cpp" />
+    <ClCompile Include="..\Particle\b2Particle.cpp" />
+    <ClCompile Include="..\Particle\b2ParticleAssembly.cpp" />
+    <ClCompile Include="..\Particle\b2ParticleGroup.cpp" />
+    <ClCompile Include="..\Particle\b2ParticleSystem.cpp" />
+    <ClCompile Include="..\Particle\b2VoronoiDiagram.cpp" />
     <ClCompile Include="..\Rope\b2Rope.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -72,11 +80,17 @@
     <ClInclude Include="..\Collision\Shapes\b2Shape.h" />
     <ClInclude Include="..\Common\b2BlockAllocator.h" />
     <ClInclude Include="..\Common\b2Draw.h" />
+    <ClInclude Include="..\Common\b2FreeList.h" />
+    <ClInclude Include="..\Common\b2GrowableBuffer.h" />
     <ClInclude Include="..\Common\b2GrowableStack.h" />
+    <ClInclude Include="..\Common\b2IntrusiveList.h" />
     <ClInclude Include="..\Common\b2Math.h" />
     <ClInclude Include="..\Common\b2Settings.h" />
+    <ClInclude Include="..\Common\b2SlabAllocator.h" />
     <ClInclude Include="..\Common\b2StackAllocator.h" />
+    <ClInclude Include="..\Common\b2Stat.h" />
     <ClInclude Include="..\Common\b2Timer.h" />
+    <ClInclude Include="..\Common\b2TrackedBlock.h" />
     <ClInclude Include="..\Dynamics\b2Body.h" />
     <ClInclude Include="..\Dynamics\b2ContactManager.h" />
     <ClInclude Include="..\Dynamics\b2Fixture.h" />
@@ -105,7 +119,16 @@
     <ClInclude Include="..\Dynamics\Joints\b2RopeJoint.h" />
     <ClInclude Include="..\Dynamics\Joints\b2WeldJoint.h" />
     <ClInclude Include="..\Dynamics\Joints\b2WheelJoint.h" />
+    <ClInclude Include="..\Particle\b2Particle.h" />
+    <ClInclude Include="..\Particle\b2ParticleAssembly.h" />
+    <ClInclude Include="..\Particle\b2ParticleGroup.h" />
+    <ClInclude Include="..\Particle\b2ParticleSystem.h" />
+    <ClInclude Include="..\Particle\b2StackQueue.h" />
+    <ClInclude Include="..\Particle\b2VoronoiDiagram.h" />
     <ClInclude Include="..\Rope\b2Rope.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Particle\b2ParticleAssembly.neon.s" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>libbox2d</ProjectName>

@@ -22,6 +22,9 @@
     <Filter Include="Rope">
       <UniqueIdentifier>{ac5c2bb8-243b-4c0e-bc5b-09299960f055}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{dec10526-11d5-4578-ba5a-0f244a9e0f53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Collision\b2BroadPhase.cpp">
@@ -161,6 +164,30 @@
     </ClCompile>
     <ClCompile Include="..\Rope\b2Rope.cpp">
       <Filter>Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Particle\b2Particle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Particle\b2ParticleAssembly.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Particle\b2ParticleGroup.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Particle\b2ParticleSystem.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Particle\b2VoronoiDiagram.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\b2FreeList.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\b2Stat.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\b2TrackedBlock.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -303,5 +330,46 @@
       <Filter>Rope</Filter>
     </ClInclude>
     <ClInclude Include="..\Box2D.h" />
+    <ClInclude Include="..\Particle\b2Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Particle\b2ParticleAssembly.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Particle\b2ParticleGroup.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Particle\b2ParticleSystem.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Particle\b2StackQueue.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Particle\b2VoronoiDiagram.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\b2FreeList.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\b2GrowableBuffer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\b2IntrusiveList.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\b2SlabAllocator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\b2Stat.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\b2TrackedBlock.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Particle\b2ParticleAssembly.neon.s">
+      <Filter>Particle</Filter>
+    </None>
   </ItemGroup>
 </Project>
