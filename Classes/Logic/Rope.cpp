@@ -100,8 +100,8 @@ void Rope::addOneBody(float angle, bool isLast)
 	}
 	float prevX = prevBody->GetPosition().x;
 	float prevY = prevBody->GetPosition().y;
-	float currX = prevX + cos(angle) * RopeBodyOffset;
-	float currY = prevY + sin(angle) * RopeBodyOffset;
+	float currX = prevX - cos(angle) * RopeBodyOffset;
+	float currY = prevY - sin(angle) * RopeBodyOffset;
 
 	// body
 	if (!isLast)
@@ -109,7 +109,7 @@ void Rope::addOneBody(float angle, bool isLast)
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.position = b2Vec2(currX, currY);
-		bodyDef.angle = angle;
+		bodyDef.angle = angle - 0.5f*b2_pi; // box's angle is pi/2 when created.
 		currBody = _world->getB2World()->CreateBody(&bodyDef);
 		b2FixtureDef fixtureDef;
 		b2PolygonShape polygonShape;
@@ -157,6 +157,7 @@ void Rope::linkUnits(Unit* first, Unit* last)
 	
 	float dis = sqrt(disX * disX + disY * disY);
 	float angle = disX == 0.0f ? (disY > 0.0f ? 0.5f*b2_pi : 1.5f*b2_pi) : atan(disY/disX);
+    angle = angle > 0 ? angle : b2_pi + angle;
 	int count = (int)dis / RopeBodyOffset;
 
 
