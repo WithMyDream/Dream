@@ -16,10 +16,10 @@ public:
     void initB2Body() override;
     b2Body* getB2Body() override { return getFirstBody(); }
     
-    void addOneBody();
     std::vector<b2Body*>& getB2Bodies(){ return _b2Bodies; }
     b2Body* getFirstBody(){ return _b2Bodies.front(); }
     b2Body* getLastBody(){ return _b2Bodies.back(); }
+	void linkUnits(Unit* first, Unit* last);
     void jointFirstTo(Unit* unit);
     void jointLastTo(Unit* unit);
 
@@ -34,11 +34,15 @@ public:
     void update(float dt) override;
     
 private:
-    
-    
+	void clear();
+	void addOneBody(float angle, bool isLast);
+
 private:
     std::vector<b2Body*>    _b2Bodies;
     std::vector<b2Joint*>   _b2Joints;
+
+	Unit*					_firstUnit;
+	Unit*					_lastUnit;
     
     float                   _ropeRadius;
 };
