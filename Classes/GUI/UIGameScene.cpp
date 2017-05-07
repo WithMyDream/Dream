@@ -31,6 +31,8 @@ bool UIGameScene::init()
     b2Vec2 pos((mainUnit->getPostion().x + 200.0f/B2SCALE), mainUnit->getPostion().y + 100.0f/B2SCALE);
     mainUnit->setPosition(pos);
     _world->setMainUnit(mainUnit);
+    Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    _world->setMainUnitViewSize(b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
     
     // test rope
     Rope* rope = Rope::create(_world, 1);

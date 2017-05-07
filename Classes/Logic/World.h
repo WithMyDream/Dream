@@ -10,6 +10,18 @@
 
 extern const float B2SCALE;
 
+class QueryCallback : public b2QueryCallback
+{
+public:
+    QueryCallback();
+    QueryCallback(std::vector<Unit*>& queryUnits);
+    ~QueryCallback();
+    bool ReportFixture(b2Fixture* fixture) override;
+    bool ShouldQueryParticleSystem(const b2ParticleSystem* particleSystem) override;
+private:
+    std::vector<Unit*>& _queryUnits;
+};
+
 class World : public cocos2d::Ref
 {
 public:
@@ -17,24 +29,31 @@ public:
     
     World();
     ~World();
+    
+    // world
     bool init();
-    
     void setLogicFPS(int logicFPS);
-    
-    b2World* getB2World(){ return _b2World; }
-    
-    void setGravity(float grivaty);
-    float getGravity(){ return _gravity; }
-    
     void loadWorldTMX(const std::string& tmxPath);
     
+    // physics
+    b2World* getB2World(){ return _b2World; }
+    void setGravity(float grivaty);
+    float getGravity(){ return _gravity; }
+    std::vector<Unit*>& queryAABB();
+    std::vector<Unit*>& getQueryUnits(){ return _queryUnits; }
+    
+    // units
     Unit* createUnit(int ID);
     Unit* createRope(int ID);
     void destroyUnit(int index);
     
+    // main unit
     void setMainUnit(Unit* unit){ _mainUnit = unit; }
-    Unit* getMainUnit(){ return _mainUnit; }
+    Unit* getMainUnit() const { return _mainUnit; }
+    void setMainUnitViewSize(b2Vec2 size){ _viewSize = size; }
+    const b2Vec2& getMainUnitViewSize() const { return _viewSize; }
     
+    // input
     void onJoystick(EventParams &params);
     void onButton(EventParams &params);
     
@@ -46,17 +65,24 @@ private:
     void update(float dt);
     
 private:
-    // world time
+    // world
     int         _logicFPS;
     float       _frameTime;
     float       _pushTime;
     float       _worldTime;
     
+    // physics
     b2World*    _b2World;
     float       _gravity;
+    std::vector<Unit*>  _queryUnits;
+    QueryCallback*      _queryCallback;
     
+    // units
     std::vector<Unit*> _units;
+    
+    // main unit
     Unit*       _mainUnit;      // weak ref
+    b2Vec2      _viewSize;
     
     b2ParticleSystem* m_particleSystem;
 };

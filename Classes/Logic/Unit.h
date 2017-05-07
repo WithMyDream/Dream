@@ -26,6 +26,7 @@ public:
     
     void move(float angle);
     void jump();
+    void hang();
     
     virtual void update(float dt);
     

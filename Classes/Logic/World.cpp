@@ -12,6 +12,33 @@ const float InitGravity = -10.0f;
 const int VelocityIterations = 10;
 const int PositionIterations = 10;
 
+/// -------------------------------------------- QueryCallback --------------------------------------------
+
+QueryCallback::QueryCallback(std::vector<Unit*>& queryUnits)
+: _queryUnits(queryUnits)
+{
+    
+}
+
+QueryCallback::~QueryCallback()
+{
+    
+}
+
+bool QueryCallback::ReportFixture(b2Fixture* fixture)
+{
+    Unit* unit = static_cast<Unit*>(fixture->GetBody()->GetUserData());
+    _queryUnits.push_back(unit);
+}
+
+bool QueryCallback::ShouldQueryParticleSystem(const b2ParticleSystem* particleSystem)
+{
+    return false;
+}
+
+
+/// -------------------------------------------- World --------------------------------------------
+
 World* World::create()
 {
     World* world = new World();
@@ -26,12 +53,18 @@ World::World()
 , _worldTime(0.0f)
 , _b2World(nullptr)
 , _mainUnit(nullptr)
+, _queryCallback(nullptr)
 {
-    
+    _queryUnits.reserve(64);
+    _queryCallback = new QueryCallback(_queryUnits);
+    _units.reserve(64);
+    _viewSize.SetZero();
 }
 
 World::~World()
 {
+    delete _queryCallback;
+    
     std::vector<Unit*>::iterator it = _units.begin();
     for ( ; it != _units.end(); ++it)
         delete *it;
@@ -102,12 +135,6 @@ void World::setLogicFPS(int logicFPS)
     _frameTime = 1.0f/_logicFPS;
 }
 
-void World::setGravity(float grivaty)
-{
-    _gravity = grivaty;
-    _b2World->SetGravity(b2Vec2(0.0f, _gravity));
-}
-
 // TODO :
 // value map is assigned as a copy,
 // it should be optimized as a reference.
@@ -155,7 +182,7 @@ void World::loadWorldTMX(const std::string& tmxPath)
             {
                 joint1 = unit;
             }
-             
+            
         }
         else if ("edge" == type)
         {
@@ -192,6 +219,23 @@ void World::loadWorldTMX(const std::string& tmxPath)
             }
         }
     }
+}
+
+void World::setGravity(float grivaty)
+{
+    _gravity = grivaty;
+    _b2World->SetGravity(b2Vec2(0.0f, _gravity));
+}
+
+std::vector<Unit*>& World::queryAABB()
+{
+    _queryUnits.clear();
+    const b2Vec2& mainPos = _mainUnit->getPostion();
+    b2AABB aabb;
+    aabb.lowerBound = b2Vec2(mainPos.x - _viewSize.x/2.0f, mainPos.y - _viewSize.y/2.0f);
+    aabb.upperBound = b2Vec2(mainPos.x + _viewSize.x/2.0f, mainPos.y + _viewSize.y/2.0f);
+    _b2World->QueryAABB(_queryCallback, aabb);
+    
 }
 
 Unit* World::createUnit(int ID)

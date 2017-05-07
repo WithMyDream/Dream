@@ -1,7 +1,6 @@
 #include "Rope.h"
 
 #include "World.h"
-#include "base/CCDirector.h"
 
 const float RopeBodyOffset = 10.0f/B2SCALE;
 
@@ -18,8 +17,8 @@ Rope::Rope()
 , _lastUnit(nullptr)
 , _ropeRadius(2.0f/B2SCALE)
 {
-    _b2Bodies.reserve(8);
-    _b2Joints.reserve(8);
+    _b2Bodies.reserve(16);
+    _b2Joints.reserve(16);
 }
 
 Rope::~Rope()
@@ -113,9 +112,9 @@ void Rope::addOneBody(float angle, bool isLast)
 		currBody = _world->getB2World()->CreateBody(&bodyDef);
 		b2FixtureDef fixtureDef;
 		b2PolygonShape polygonShape;
-		polygonShape.SetAsBox(_ropeRadius, RopeBodyOffset / 2.0f);
+        polygonShape.SetAsBox(_ropeRadius, (RopeBodyOffset / 2.0f) - 2.0f/B2SCALE);
 		fixtureDef.shape = &polygonShape;
-		fixtureDef.density = 100;
+		fixtureDef.density = 200;
 		fixtureDef.friction = 0.5;
 		fixtureDef.restitution = 0.2;
 		currBody->CreateFixture(&fixtureDef);
@@ -125,7 +124,7 @@ void Rope::addOneBody(float angle, bool isLast)
 	{
 		currBody = _lastUnit->getB2Body();
 	}
-
+    
 	// joint
 	b2RevoluteJointDef distanceJointDef;
 	distanceJointDef.Initialize(prevBody, currBody, b2Vec2((prevX + currX)/2.0f, (prevY + currY) / 2.0f));

@@ -1,7 +1,6 @@
 #include "Unit.h"
 
 #include "World.h"
-#include "base/CCDirector.h"
 
 Unit* Unit::create(World* world, int ID)
 {
@@ -51,8 +50,7 @@ void Unit::initB2Body()
     
     if (_ID != -1)
     {
-        cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
-        _b2Body->SetTransform(b2Vec2(winSize.width/2.0f/B2SCALE, winSize.height/2.0f/B2SCALE), _b2Body->GetAngle());
+        _b2Body->SetTransform(b2Vec2(_world->getMainUnitViewSize().x/2.0f, _world->getMainUnitViewSize().y/2.0f), _b2Body->GetAngle());
         
         b2FixtureDef fixtureDef;
         fixtureDef.density = 1.0f;
@@ -104,12 +102,40 @@ void Unit::move(float angle)
     
     _currDir = dir;
     
+    
+    // reset
+    if (_currDir == 1)       // up
+    {
+        
+    }
+    else if (_currDir == 2)  // left
+    {
+        _b2Body->ApplyLinearImpulse(b2Vec2(-100.0f, 0.0f), _b2Body->GetWorldCenter(), true);
+    }
+    else if (_currDir == 3)  // down
+    {
+        
+    }
+    else                // right
+    {
+        _b2Body->ApplyLinearImpulse(b2Vec2(100.0f, 0.0f), _b2Body->GetWorldCenter(), true);
+    }
+    _currDir = -1;
+    
 }
 
 void Unit::jump()
 {
     _b2Body->ApplyLinearImpulse(_jumpImpulseMax, _b2Body->GetWorldCenter(), true);
 }
+
+void Unit::hang()
+{
+    
+}
+
+
+/// -------------------------------------------- update --------------------------------------------
 
 void Unit::_move()
 {
