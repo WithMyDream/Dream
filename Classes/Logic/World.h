@@ -39,13 +39,14 @@ public:
     b2World* getB2World(){ return _b2World; }
     void setGravity(float grivaty);
     float getGravity(){ return _gravity; }
-    std::vector<Unit*>& queryAABB();
+    std::vector<Unit*>& queryAABB(Unit* unit);
     std::vector<Unit*>& getQueryUnits(){ return _queryUnits; }
     
     // units
     Unit* createUnit(int ID);
-    Unit* createRope(int ID);
+	Rope* createRope(int ID);
     void destroyUnit(int index);
+	void destroyUnit(Unit* unit);
     
     // main unit
     void setMainUnit(Unit* unit){ _mainUnit = unit; }
@@ -79,6 +80,8 @@ private:
     
     // units
     std::vector<Unit*> _units;
+	std::vector<Unit*> _deleteUnits;
+	std::vector<int> _deleteUnitIndexs;
     
     // main unit
     Unit*       _mainUnit;      // weak ref

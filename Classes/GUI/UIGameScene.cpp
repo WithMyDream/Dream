@@ -28,6 +28,8 @@ bool UIGameScene::init()
     // test
     _world->loadWorldTMX("Map/map001.tmx");
     Unit* mainUnit = _world->createUnit(1);
+	mainUnit->setName(std::string("Jon"));
+	mainUnit->setType(UnitTypeHero);
     b2Vec2 pos((mainUnit->getPostion().x + 200.0f/B2SCALE), mainUnit->getPostion().y + 100.0f/B2SCALE);
     mainUnit->setPosition(pos);
     _world->setMainUnit(mainUnit);

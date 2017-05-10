@@ -3,8 +3,20 @@
 
 #include "base/CCRef.h"
 #include "Box2D/Box2D.h"
+#include <string>
 
 class World;
+class Rope;
+
+enum UnitType
+{
+	UnitTypeUnknown,
+	UnitTypeHero,
+	UnitTypeJoint,
+	UnitTypeGround,
+	UnitTypeBarrier,
+	UnitTypeFrame
+};
 
 class Unit : public cocos2d::Ref
 {
@@ -14,6 +26,8 @@ public:
     Unit();
     ~Unit();
     virtual bool init(World* world, int ID);
+	void destroy() { _isDestroy = true; }
+	bool isDestroy() const { return _isDestroy; }
     
     virtual void initB2Body();
     virtual b2Body* getB2Body(){ return _b2Body; }
@@ -23,10 +37,16 @@ public:
     
     virtual void setAngle(float32 angle);
     virtual float32 getAngle();
+
+	void setName(std::string& name) { _name = name; }
+	std::string getName() { return _name; }
+
+	void setType(UnitType type) { _type = type; }
+	UnitType getType() { return _type; }
     
     void move(float angle);
     void jump();
-    void hang();
+    void hang(Unit* unit);
     
     virtual void update(float dt);
     
@@ -36,19 +56,25 @@ protected:
 protected:
     World*      _world; // weak ref
     b2Body*     _b2Body;
+	bool		_isDestroy;
     
     int         _ID;
-    
+	std::string	_name;
+	UnitType	_type;
+	
     float       _delta;
-    
-    // jump
-    b2Vec2      _jumpImpulseMax;
-    
+	
     // move
     float       _moveVxMax;
     float       _moveAngle;
     b2Vec2      _currMoveForce;
     int         _currDir;
+
+	// jump
+	b2Vec2      _jumpImpulseMax;
+
+	// hang
+	Rope*		_linkingRope;
 };
 
 #endif // __Unit_H__

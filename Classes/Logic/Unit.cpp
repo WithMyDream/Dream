@@ -13,11 +13,15 @@ Unit* Unit::create(World* world, int ID)
 Unit::Unit()
 : _world(nullptr)
 , _b2Body(nullptr)
+, _isDestroy(false)
 , _ID(-1)
-, _jumpImpulseMax(b2Vec2(0.0f, 100.0f))
+, _name("")
+, _type(UnitTypeUnknown)
 , _moveVxMax(5.0f)
 , _currMoveForce(b2Vec2(0.0f, 0.0f))
 , _currDir(-1)
+, _jumpImpulseMax(b2Vec2(0.0f, 100.0f))
+, _linkingRope(nullptr)
 {
     
 }
@@ -129,9 +133,31 @@ void Unit::jump()
     _b2Body->ApplyLinearImpulse(_jumpImpulseMax, _b2Body->GetWorldCenter(), true);
 }
 
-void Unit::hang()
+void Unit::hang(Unit* unit)
 {
-    
+	Unit* linkingUnit = unit;
+	if (!linkingUnit)
+	{
+		std::vector<Unit*>& queryUnits = _world->queryAABB(this);
+		if (queryUnits.empty())
+		{
+			return;
+		}
+
+		std::sort(queryUnits.begin(), queryUnits.end(), [this](Unit* a, Unit* b)->bool {
+			return abs(a->getPostion().x - this->getPostion().x) > abs(b->getPostion().x - this->getPostion().x);
+		});
+
+		linkingUnit = queryUnits.front();
+	}
+	
+	if (_linkingRope)
+	{
+		_linkingRope->destroy();
+	}
+	Rope* rope = _world->createRope(1);
+	rope->linkUnits(linkingUnit, this);
+	_linkingRope = rope;
 }
 
 

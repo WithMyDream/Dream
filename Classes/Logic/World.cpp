@@ -28,7 +28,12 @@ QueryCallback::~QueryCallback()
 bool QueryCallback::ReportFixture(b2Fixture* fixture)
 {
     Unit* unit = static_cast<Unit*>(fixture->GetBody()->GetUserData());
-    _queryUnits.push_back(unit);
+	if (unit->getType() == UnitTypeJoint)
+	{
+		_queryUnits.push_back(unit);
+	}
+	
+	return true;
 }
 
 bool QueryCallback::ShouldQueryParticleSystem(const b2ParticleSystem* particleSystem)
@@ -58,6 +63,8 @@ World::World()
     _queryUnits.reserve(64);
     _queryCallback = new QueryCallback(_queryUnits);
     _units.reserve(64);
+	_deleteUnits.reserve(64);
+	_deleteUnitIndexs.reserve(64);
     _viewSize.SetZero();
 }
 
@@ -163,6 +170,7 @@ void World::loadWorldTMX(const std::string& tmxPath)
         {
             /**/
             Unit* unit = createUnit(-1);
+			unit->setName(name);
             b2Body* b2body = unit->getB2Body();
             b2body->SetType(b2_staticBody);
             
@@ -181,12 +189,18 @@ void World::loadWorldTMX(const std::string& tmxPath)
             if ("joint1" == name)
             {
                 joint1 = unit;
+				unit->setType(UnitTypeJoint);
             }
+			else if ("ground" == name)
+			{
+				unit->setType(UnitTypeGround);
+			}
             
         }
         else if ("edge" == type)
         {
             Unit* unit = createUnit(-1);
+			unit->setName(name);
             b2Body* b2body = unit->getB2Body();
             b2body->SetType(b2_staticBody);
             
@@ -217,6 +231,16 @@ void World::loadWorldTMX(const std::string& tmxPath)
                 prevX = pointX;
                 prevY = pointY;
             }
+
+			if ("barrier" == name)
+			{
+				joint1 = unit;
+				unit->setType(UnitTypeBarrier);
+			}
+			else if ("frame" == name)
+			{
+				unit->setType(UnitTypeFrame);
+			}
         }
     }
 }
@@ -227,15 +251,16 @@ void World::setGravity(float grivaty)
     _b2World->SetGravity(b2Vec2(0.0f, _gravity));
 }
 
-std::vector<Unit*>& World::queryAABB()
+std::vector<Unit*>& World::queryAABB(Unit* unit)
 {
     _queryUnits.clear();
-    const b2Vec2& mainPos = _mainUnit->getPostion();
+    const b2Vec2& mainPos = unit->getPostion();
     b2AABB aabb;
     aabb.lowerBound = b2Vec2(mainPos.x - _viewSize.x/2.0f, mainPos.y - _viewSize.y/2.0f);
     aabb.upperBound = b2Vec2(mainPos.x + _viewSize.x/2.0f, mainPos.y + _viewSize.y/2.0f);
     _b2World->QueryAABB(_queryCallback, aabb);
     
+	return _queryUnits;
 }
 
 Unit* World::createUnit(int ID)
@@ -254,7 +279,7 @@ Unit* World::createUnit(int ID)
     return unit;
 }
 
-Unit* World::createRope(int ID)
+Rope* World::createRope(int ID)
 {
     Rope* rope = Rope::create(this, ID);
     
@@ -272,7 +297,15 @@ Unit* World::createRope(int ID)
 
 void World::destroyUnit(int index)
 {
-    
+	if (index < 0 || index > _units.size() - 1)
+		return;
+
+	_units[index]->destroy();
+}
+
+void World::destroyUnit(Unit* unit)
+{
+	unit->destroy();
 }
 
 void World::onJoystick(EventParams &params)
@@ -311,7 +344,31 @@ void World::update(float dt)
     _b2World->Step(dt, VelocityIterations, PositionIterations);
     
     // update units
-    std::vector<Unit*>::iterator it = _units.begin();
-    for ( ; it != _units.end(); ++it)
-        (*it)->update(dt);
+	_deleteUnitIndexs.clear();
+	int num = _units.size();
+	for (int i = 0; i < num; ++i)
+	{
+		Unit* unit = _units[i];
+		unit->update(dt);
+		if (unit->isDestroy())
+		{
+			_deleteUnitIndexs.push_back(i);
+		}
+	}
+
+	// handle delete
+	int deleteNum = _deleteUnitIndexs.size();
+	for (int i = 0; i < deleteNum; ++i)
+	{
+		int deleteIndex = _deleteUnitIndexs[i];
+		int backIndex = num - 1 - i;
+		Unit* tempUnit = _units[backIndex];
+		_units[backIndex] = _units[deleteIndex];
+		_units[deleteIndex] = tempUnit;
+	}
+	for (int i = 0; i < deleteNum; ++i)
+	{
+		delete _units.back();
+		_units.pop_back();
+	}
 }
