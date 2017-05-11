@@ -22,13 +22,14 @@ Unit::Unit()
 , _currDir(-1)
 , _jumpImpulseMax(b2Vec2(0.0f, 100.0f))
 , _linkingRope(nullptr)
+, _linkingJoint(nullptr)
 {
     
 }
 
 Unit::~Unit()
 {
-    
+    CCLOG("Unit::~Unit : %s", _name.c_str());
 }
 
 bool Unit::init(World* world, int ID)
@@ -39,6 +40,12 @@ bool Unit::init(World* world, int ID)
     initB2Body();
     
     return true;
+}
+
+void Unit::end()
+{
+    CCLOG("Unit::end : %s", _name.c_str());
+    _world->getB2World()->DestroyBody(_b2Body);
 }
 
 void Unit::initB2Body()
@@ -139,13 +146,23 @@ void Unit::hang(Unit* unit)
 	if (!linkingUnit)
 	{
 		std::vector<Unit*>& queryUnits = _world->queryAABB(this);
+        std::vector<Unit*>::iterator it = queryUnits.begin();
+        // remove curr hanging joint
+        for ( ; it != queryUnits.end(); ++it)
+        {
+            if ((*it) == _linkingJoint)
+            {
+                queryUnits.erase(it);
+                break;
+            }
+        }
 		if (queryUnits.empty())
 		{
 			return;
 		}
 
 		std::sort(queryUnits.begin(), queryUnits.end(), [this](Unit* a, Unit* b)->bool {
-			return abs(a->getPostion().x - this->getPostion().x) > abs(b->getPostion().x - this->getPostion().x);
+			return abs(a->getPostion().x - this->getPostion().x) < abs(b->getPostion().x - this->getPostion().x);
 		});
 
 		linkingUnit = queryUnits.front();
@@ -155,9 +172,10 @@ void Unit::hang(Unit* unit)
 	{
 		_linkingRope->destroy();
 	}
-	Rope* rope = _world->createRope(1);
+	Rope* rope = _world->createRope(-1);
 	rope->linkUnits(linkingUnit, this);
 	_linkingRope = rope;
+    _linkingJoint = linkingUnit;
 }
 
 

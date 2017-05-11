@@ -26,6 +26,7 @@ public:
     Unit();
     ~Unit();
     virtual bool init(World* world, int ID);
+    virtual void end();
 	void destroy() { _isDestroy = true; }
 	bool isDestroy() const { return _isDestroy; }
     
@@ -75,6 +76,7 @@ protected:
 
 	// hang
 	Rope*		_linkingRope;
+    Unit*       _linkingJoint;
 };
 
 #endif // __Unit_H__

@@ -12,6 +12,7 @@ public:
     Rope();
     ~Rope();
     bool init(World* world, int ID) override;
+    void end() override;
     
     void initB2Body() override;
     b2Body* getB2Body() override { return getFirstBody(); }

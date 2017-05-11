@@ -33,6 +33,12 @@ bool Rope::init(World* world, int ID)
     return true;
 }
 
+void Rope::end()
+{
+    CCLOG("Rope::end : %s", _name.c_str());
+    clear();
+}
+
 void Rope::initB2Body()
 {
     if (!_world)
@@ -66,19 +72,19 @@ void Rope::initB2Body()
 
 void Rope::clear()
 {
-	for (int i = 0; i < _b2Bodies.size(); ++i)
-	{
-		b2Body* body = _b2Bodies[i];
-		_world->getB2World()->DestroyBody(body);
-	}
-	_b2Bodies.clear();
-
 	for (int i = 0; i < _b2Joints.size(); ++i)
 	{
 		b2Joint* joint = _b2Joints[i];
 		_world->getB2World()->DestroyJoint(joint);
 	}
 	_b2Joints.clear();
+    
+    for (int i = 0; i < _b2Bodies.size(); ++i)
+    {
+        b2Body* body = _b2Bodies[i];
+        _world->getB2World()->DestroyBody(body);
+    }
+    _b2Bodies.clear();
 
 	_firstUnit = nullptr;
 	_lastUnit = nullptr;

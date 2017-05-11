@@ -28,7 +28,7 @@ QueryCallback::~QueryCallback()
 bool QueryCallback::ReportFixture(b2Fixture* fixture)
 {
     Unit* unit = static_cast<Unit*>(fixture->GetBody()->GetUserData());
-	if (unit->getType() == UnitTypeJoint)
+	if (unit && unit->getType() == UnitTypeJoint)
 	{
 		_queryUnits.push_back(unit);
 	}
@@ -191,6 +191,10 @@ void World::loadWorldTMX(const std::string& tmxPath)
                 joint1 = unit;
 				unit->setType(UnitTypeJoint);
             }
+            else if ("joint" == name)
+            {
+                unit->setType(UnitTypeJoint);
+            }
 			else if ("ground" == name)
 			{
 				unit->setType(UnitTypeGround);
@@ -323,7 +327,7 @@ void World::onButton(EventParams &params)
     //CCLOG("[World::onButton] index : %d", button._index);
     
     if (_mainUnit)
-        _mainUnit->jump();
+        _mainUnit->hang(nullptr);
 }
 
 void World::pusher(float dt)
@@ -368,7 +372,9 @@ void World::update(float dt)
 	}
 	for (int i = 0; i < deleteNum; ++i)
 	{
-		delete _units.back();
+        Unit* deleteUnit = _units.back();
+        deleteUnit->end();
+		delete deleteUnit;
 		_units.pop_back();
 	}
 }
