@@ -170,7 +170,7 @@ void Unit::hang(Unit* unit)
 	
 	if (_linkingRope)
 	{
-		_linkingRope->destroy();
+		_world->destroyUnit(_linkingRope);
 	}
 	Rope* rope = _world->createRope(-1);
 	rope->linkUnits(linkingUnit, this);

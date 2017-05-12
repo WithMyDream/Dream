@@ -4,6 +4,9 @@
 enum EventType
 {
     EventCreateUnit = 0,
+	EventCreateRope,
+	EventDestroyUnit,
+	EventSetMainUnit,
     EventJoystick,
     EventButton,
     EventMax,
@@ -26,6 +29,37 @@ public:
     {};
     
     Unit* _unit;
+};
+
+class Rope;
+class ECreateRope : public EventParams
+{
+public:
+	ECreateRope(Rope* rope):EventParams(EventCreateRope)
+	, _rope(rope)
+	{};
+
+	Rope* _rope;
+};
+
+class EDestroyUnit : public EventParams
+{
+public:
+	EDestroyUnit(Unit* unit):EventParams(EventDestroyUnit)
+	, _unit(unit)
+	{};
+
+	Unit* _unit;
+};
+
+class ESetMainUnit : public EventParams
+{
+public:
+	ESetMainUnit(Unit* unit) :EventParams(EventSetMainUnit)
+		, _unit(unit)
+	{};
+
+	Unit* _unit;
 };
 
 class EJoystick : public EventParams

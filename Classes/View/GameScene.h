@@ -23,7 +23,12 @@ public:
     void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
     
     void onCreateUnit(EventParams &params);
+	void onCreateRope(EventParams &params);
+	void onDestroyUnit(EventParams &params);
+	void onSetMainUnit(EventParams &params);
     void onJoystick(EventParams &params);
+
+	Actor* findActorWithUnit(Unit* unit);
     
     void update(float dt) override;
     
@@ -32,7 +37,7 @@ private:
     
 private:
     std::vector<Actor*> _actors;
-    
+	std::vector<int> _deleteActorIndexs;
     
     B2DebugDrawLayer*   _debugDrawLayer;
 };

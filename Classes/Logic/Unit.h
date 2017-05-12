@@ -39,6 +39,11 @@ public:
     virtual void setAngle(float32 angle);
     virtual float32 getAngle();
 
+	void setIndex(int index) { _index = index; }
+	int getIndex() { return _index; }
+
+	int getID() { return _ID; }
+
 	void setName(std::string& name) { _name = name; }
 	std::string getName() { return _name; }
 
@@ -59,6 +64,7 @@ protected:
     b2Body*     _b2Body;
 	bool		_isDestroy;
     
+	int			_index;
     int         _ID;
 	std::string	_name;
 	UnitType	_type;

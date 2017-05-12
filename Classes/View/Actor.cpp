@@ -11,21 +11,26 @@ Actor* Actor::create()
 
 Actor::Actor()
 :_unit(nullptr)
+, _isDestroy(false)
 {
     
 }
 
 Actor::~Actor()
 {
+	CCLOG("Actor::~Actor");
     _unit = nullptr;
 }
 
 bool Actor::init()
 {
-    Sprite* sprite = Sprite::create("HelloWorld.png");
-    addChild(sprite);
     
     return true;
+}
+
+void Actor::end()
+{
+
 }
 
 void Actor::update(float dt)

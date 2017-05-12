@@ -63,7 +63,6 @@ World::World()
     _queryUnits.reserve(64);
     _queryCallback = new QueryCallback(_queryUnits);
     _units.reserve(64);
-	_deleteUnits.reserve(64);
 	_deleteUnitIndexs.reserve(64);
     _viewSize.SetZero();
 }
@@ -274,11 +273,8 @@ Unit* World::createUnit(int ID)
     unit->retain();
     _units.push_back(unit);
     
-    if (ID != -1)
-    {
-        ECreateUnit params(unit);
-        EventMgr::getInatence()->notify(params);
-    }
+	ECreateUnit params(unit);
+	EventMgr::getInatence()->notify(params);
     
     return unit;
 }
@@ -290,11 +286,8 @@ Rope* World::createRope(int ID)
     rope->retain();
     _units.push_back(rope);
     
-    if (ID != -1)
-    {
-        ECreateUnit params(rope);
-        EventMgr::getInatence()->notify(params);
-    }
+	ECreateUnit params(rope);
+	EventMgr::getInatence()->notify(params);
     
     return rope;
 }
@@ -310,6 +303,17 @@ void World::destroyUnit(int index)
 void World::destroyUnit(Unit* unit)
 {
 	unit->destroy();
+
+	EDestroyUnit params(unit);
+	EventMgr::getInatence()->notify(params);
+}
+
+void World::setMainUnit(Unit* unit)
+{
+	_mainUnit = unit;
+
+	ESetMainUnit params(_mainUnit);
+	EventMgr::getInatence()->notify(params);
 }
 
 void World::onJoystick(EventParams &params)
@@ -374,7 +378,7 @@ void World::update(float dt)
 	{
         Unit* deleteUnit = _units.back();
         deleteUnit->end();
-		delete deleteUnit;
+		deleteUnit->release();
 		_units.pop_back();
 	}
 }

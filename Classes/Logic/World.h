@@ -49,7 +49,7 @@ public:
 	void destroyUnit(Unit* unit);
     
     // main unit
-    void setMainUnit(Unit* unit){ _mainUnit = unit; }
+	void setMainUnit(Unit* unit);
     Unit* getMainUnit() const { return _mainUnit; }
     void setMainUnitViewSize(b2Vec2 size){ _viewSize = size; }
     const b2Vec2& getMainUnitViewSize() const { return _viewSize; }
@@ -80,7 +80,6 @@ private:
     
     // units
     std::vector<Unit*> _units;
-	std::vector<Unit*> _deleteUnits;
 	std::vector<int> _deleteUnitIndexs;
     
     // main unit

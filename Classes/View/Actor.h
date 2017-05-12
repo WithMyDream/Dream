@@ -15,8 +15,12 @@ public:
     Actor();
     ~Actor();
     bool init();
+	void end();
+	void destroy() { _isDestroy = true; }
+	bool isDestroy() const { return _isDestroy; }
     
     void setUnit(Unit* unit){_unit = unit; }
+	Unit* getUnit() { return _unit; }
     
     void update(float dt);
     
@@ -24,7 +28,8 @@ private:
     
     
 private:
-    Unit* _unit;    // weak ref
+    Unit*	_unit;    // weak ref
+	bool	_isDestroy;
 };
 
 #endif // __Actor_H__
