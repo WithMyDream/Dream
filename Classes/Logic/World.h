@@ -22,6 +22,8 @@ private:
     std::vector<Unit*>& _queryUnits;
 };
 
+typedef std::function<void(Unit* unit)> UnitInitFunc;
+
 class World : public cocos2d::Ref
 {
 public:
@@ -43,7 +45,7 @@ public:
     std::vector<Unit*>& getQueryUnits(){ return _queryUnits; }
     
     // units
-    Unit* createUnit(int ID);
+    Unit* createUnit(int ID, UnitInitFunc unitInitFunc = nullptr);
 	Rope* createRope(int ID);
     void destroyUnit(int index);
 	void destroyUnit(Unit* unit);

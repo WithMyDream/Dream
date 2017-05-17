@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="200" height="20" tilewidth="32" tileheight="32" nextobjectid="41">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="200" height="20" tilewidth="32" tileheight="32" nextobjectid="111">
  <tileset firstgid="1" name="map001" tilewidth="32" tileheight="32" tilecount="240" columns="20">
   <image source="map001.png" width="640" height="400"/>
  </tileset>
@@ -14,7 +14,7 @@
   <object id="21" name="barrier" type="edge" x="884" y="555">
    <polyline points="-10,-41 78,-148 104,-93 69,-19 -35,60"/>
   </object>
-  <object id="22" name="saw" type="circle" x="240" y="270" width="89" height="89">
+  <object id="22" name="saw" type="circle" x="240" y="270" width="89" height="89" visible="0">
    <ellipse/>
   </object>
   <object id="23" name="frame" type="edge" x="2" y="3">
@@ -26,5 +26,74 @@
   <object id="38" name="joint" type="box" x="1100" y="-5" width="10" height="10"/>
   <object id="39" name="joint" type="box" x="1300" y="-5" width="10" height="10"/>
   <object id="40" name="joint" type="box" x="1500" y="-5" width="10" height="10"/>
+  <object id="41" name="ground" type="box" x="0" y="435.722" width="160" height="173.556"/>
+  <object id="42" name="ground" type="box" x="160" y="307.222" width="160" height="300.556"/>
+  <object id="43" name="ground" type="box" x="321" y="386.722" width="95" height="220.556"/>
+  <object id="44" name="ground" type="box" x="416.5" y="319.722" width="94" height="286.556"/>
+  <object id="45" name="ground" type="box" x="511" y="489.722" width="214" height="119.556"/>
+  <object id="46" name="ground" type="box" x="725" y="430.222" width="76" height="178.556"/>
+  <object id="47" name="ground" type="box" x="1025" y="340.722" width="128" height="268.556"/>
+  <object id="48" name="ground" type="box" x="1153" y="416.722" width="116.333" height="191.556"/>
+  <object id="49" name="ground" type="box" x="1268.5" y="477.222" width="115" height="131.556"/>
+  <object id="50" name="ground" type="box" x="1383.5" y="369.222" width="134.667" height="238.556"/>
+  <object id="51" name="ground" type="box" x="1518" y="274.722" width="63" height="333.556"/>
+  <object id="52" name="ground" type="box" x="1581.5" y="406.222" width="180" height="202.556"/>
+  <object id="53" name="ground" type="box" x="1762" y="320.722" width="131" height="286.556"/>
+  <object id="54" name="ground" type="box" x="1893.5" y="447.722" width="77" height="159.556"/>
+  <object id="55" name="ground" type="box" x="1970.5" y="223.222" width="141" height="384.556"/>
+  <object id="56" name="ground" type="box" x="2112.5" y="481.722" width="223" height="125.556"/>
+  <object id="57" name="ground" type="box" x="2336.5" y="338.222" width="161" height="269.556"/>
+  <object id="58" name="ground" type="box" x="2497.5" y="257.222" width="75" height="350.556"/>
+  <object id="59" name="ground" type="box" x="2573.5" y="477.722" width="498" height="130.556"/>
+  <object id="61" name="ground" type="box" x="3147" y="384.722" width="118" height="222.556"/>
+  <object id="62" name="ground" type="box" x="3071.5" y="256.722" width="75" height="350.556"/>
+  <object id="63" name="ground" type="box" x="3265" y="205.722" width="171" height="401.556"/>
+  <object id="64" name="ground" type="box" x="3436.5" y="303.222" width="146.333" height="304.556"/>
+  <object id="65" name="ground" type="box" x="3582.5" y="462.722" width="113" height="145.556"/>
+  <object id="66" name="ground" type="box" x="3695.5" y="352.222" width="89" height="254.556"/>
+  <object id="67" name="ground" type="box" x="3785.5" y="256.722" width="132.667" height="349.556"/>
+  <object id="68" name="ground" type="box" x="3918" y="388.222" width="100" height="219.556"/>
+  <object id="69" name="ground" type="box" x="4019" y="476.222" width="85" height="131.556"/>
+  <object id="70" name="ground" type="box" x="4104.5" y="350.222" width="117" height="257.556"/>
+  <object id="71" name="ground" type="box" x="4222.5" y="403.222" width="93" height="204.556"/>
+  <object id="72" name="ground" type="box" x="4314.5" y="343.722" width="86.6667" height="263.556"/>
+  <object id="73" name="ground" type="box" x="4402" y="277.222" width="94" height="330.556"/>
+  <object id="74" name="ground" type="box" x="4497" y="375.722" width="141.333" height="232.556"/>
+  <object id="75" name="ground" type="box" x="4638" y="311.722" width="105" height="295.556"/>
+  <object id="76" name="ground" type="box" x="4743.5" y="448.222" width="102.333" height="159.556"/>
+  <object id="77" name="ground" type="box" x="4845.5" y="372.222" width="161" height="235.556"/>
+  <object id="78" name="ground" type="box" x="5006.5" y="253.222" width="338" height="354.556"/>
+  <object id="79" name="ground" type="box" x="5344" y="187.722" width="72" height="421.556"/>
+  <object id="80" name="ground" type="box" x="5416.67" y="374.222" width="117.333" height="235.556"/>
+  <object id="81" name="ground" type="box" x="5535" y="303.222" width="139" height="306.556"/>
+  <object id="82" name="ground" type="box" x="5674.5" y="223.722" width="115" height="383.556"/>
+  <object id="83" name="ground" type="box" x="5791.5" y="387.222" width="126" height="221.556"/>
+  <object id="84" name="ground" type="box" x="5919" y="289.222" width="96" height="318.556"/>
+  <object id="85" name="ground" type="box" x="6017" y="445.722" width="125" height="160.556"/>
+  <object id="86" name="ground" type="box" x="6255.17" y="311.389" width="144.333" height="294.889"/>
+  <object id="87" name="ground" type="box" x="6144.17" y="373.889" width="111.667" height="233.556"/>
+  <object id="88" name="joint" type="box" x="1707" y="-5" width="10" height="10"/>
+  <object id="89" name="joint" type="box" x="1906" y="-5" width="10" height="10"/>
+  <object id="90" name="joint" type="box" x="2125" y="-5" width="10" height="10"/>
+  <object id="91" name="joint" type="box" x="2330" y="-5" width="10" height="10"/>
+  <object id="92" name="joint" type="box" x="2573" y="-5" width="10" height="10"/>
+  <object id="93" name="joint" type="box" x="2805" y="-5" width="10" height="10"/>
+  <object id="94" name="joint" type="box" x="2999" y="-5" width="10" height="10"/>
+  <object id="95" name="joint" type="box" x="3251" y="-5" width="10" height="10"/>
+  <object id="96" name="joint" type="box" x="3498" y="-5" width="10" height="10"/>
+  <object id="97" name="joint" type="box" x="3705" y="-5" width="10" height="10"/>
+  <object id="98" name="joint" type="box" x="3957" y="-5" width="10" height="10"/>
+  <object id="99" name="joint" type="box" x="4131" y="-5" width="10" height="10"/>
+  <object id="100" name="joint" type="box" x="4329" y="-5" width="10" height="10"/>
+  <object id="101" name="joint" type="box" x="4569" y="-5" width="10" height="10"/>
+  <object id="102" name="joint" type="box" x="4804" y="-5" width="10" height="10"/>
+  <object id="103" name="joint" type="box" x="5002" y="-5" width="10" height="10"/>
+  <object id="104" name="joint" type="box" x="5189" y="-5" width="10" height="10"/>
+  <object id="105" name="joint" type="box" x="5402" y="-5" width="10" height="10"/>
+  <object id="106" name="joint" type="box" x="5614" y="-5" width="10" height="10"/>
+  <object id="107" name="joint" type="box" x="5831" y="-5" width="10" height="10"/>
+  <object id="108" name="joint" type="box" x="6029" y="-5" width="10" height="10"/>
+  <object id="109" name="joint" type="box" x="6206" y="-5" width="10" height="10"/>
+  <object id="110" name="joint" type="box" x="6339" y="-5" width="10" height="10"/>
  </objectgroup>
 </map>

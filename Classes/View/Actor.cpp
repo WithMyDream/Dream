@@ -3,7 +3,7 @@
 Actor* Actor::create(Unit* unit)
 {
     Actor* actor = new Actor();
-    if (actor && actor->init(Unit* unit)) {
+    if (actor && actor->init(unit)) {
         actor->autorelease();
     }
     return actor;
@@ -40,6 +40,7 @@ bool Actor::init(Unit* unit)
 			Color4B color(255, 255, 255, 255);
 			const b2Vec2& size = unit->getSize();
 			LayerColor* layerColor = LayerColor::create(color, size.x*B2SCALE, size.y*B2SCALE);
+            layerColor->setPosition(-size.x*B2SCALE/2.0f, -size.y*B2SCALE/2.0f);
 			addChild(layerColor);
 			break;
 		}

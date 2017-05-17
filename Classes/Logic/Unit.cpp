@@ -59,6 +59,7 @@ void Unit::initB2Body()
     _b2Body = _world->getB2World()->CreateBody(&bodyDef);
     _b2Body->SetUserData(this);
     
+    /*
     if (_ID != -1)
     {
         _b2Body->SetTransform(b2Vec2(_world->getMainUnitViewSize().x/2.0f, _world->getMainUnitViewSize().y/2.0f), _b2Body->GetAngle());
@@ -72,6 +73,7 @@ void Unit::initB2Body()
         fixtureDef.shape = &circleShape;
         _b2Body->CreateFixture(&fixtureDef);
     }
+     */
 }
 
 void Unit::setPosition(b2Vec2 &pos)

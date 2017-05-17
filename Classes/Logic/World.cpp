@@ -167,41 +167,41 @@ void World::loadWorldTMX(const std::string& tmxPath)
         
         if ("box" == type)
         {
-            /**/
-            Unit* unit = createUnit(-1);
-			unit->setName(name);
-            b2Body* b2body = unit->getB2Body();
-            b2body->SetType(b2_staticBody);
-            
-            b2Vec2 pos(x/B2SCALE + width/2.0f/B2SCALE, y/B2SCALE + height/2.0f/B2SCALE);
-            unit->setPosition(pos);
-            
-            b2FixtureDef fixtureDef;
-            fixtureDef.density = 1.0f;
-            fixtureDef.friction = 0.8f;
-            fixtureDef.restitution = 0.4f;
-            b2PolygonShape polygon;
-            polygon.SetAsBox(width/2.0f/B2SCALE, height/2.0f/B2SCALE);
-            fixtureDef.shape = &polygon;
-            b2body->CreateFixture(&fixtureDef);
-
-			b2Vec2 size(width/B2SCALE, height/B2SCALE);
-			unit->setSize(size);
-            
-            if ("joint1" == name)
+            createUnit(1, [this, &name, x, y, width, height](Unit* unit)
             {
-                joint1 = unit;
-				unit->setType(UnitTypeJoint);
-            }
-            else if ("joint" == name)
-            {
-                unit->setType(UnitTypeJoint);
-            }
-			else if ("ground" == name)
-			{
-				unit->setType(UnitTypeGround);
-			}
-            
+                unit->setName(name);
+                b2Body* b2body = unit->getB2Body();
+                b2body->SetType(b2_staticBody);
+                
+                b2Vec2 pos(x/B2SCALE + width/2.0f/B2SCALE, y/B2SCALE + height/2.0f/B2SCALE);
+                unit->setPosition(pos);
+                
+                b2FixtureDef fixtureDef;
+                fixtureDef.density = 1.0f;
+                fixtureDef.friction = 0.8f;
+                fixtureDef.restitution = 0.4f;
+                b2PolygonShape polygon;
+                polygon.SetAsBox(width/2.0f/B2SCALE, height/2.0f/B2SCALE);
+                fixtureDef.shape = &polygon;
+                b2body->CreateFixture(&fixtureDef);
+                
+                b2Vec2 size(width/B2SCALE, height/B2SCALE);
+                unit->setSize(size);
+                
+                if ("joint1" == name)
+                {
+                    joint1 = unit;
+                    unit->setType(UnitTypeJoint);
+                }
+                else if ("joint" == name)
+                {
+                    unit->setType(UnitTypeJoint);
+                }
+                else if ("ground" == name)
+                {
+                    unit->setType(UnitTypeGround);
+                }
+            });
         }
         else if ("edge" == type)
         {
@@ -269,15 +269,19 @@ std::vector<Unit*>& World::queryAABB(Unit* unit)
 	return _queryUnits;
 }
 
-Unit* World::createUnit(int ID)
+Unit* World::createUnit(int ID, UnitInitFunc unitInitFunc)
 {
     Unit* unit = Unit::create(this, ID);
+    if (unitInitFunc)
+    {
+        unitInitFunc(unit);
+    }
     
     unit->retain();
     _units.push_back(unit);
     
-	ECreateUnit params(unit);
-	EventMgr::getInatence()->notify(params);
+    ECreateUnit params(unit);
+    EventMgr::getInatence()->notify(params);
     
     return unit;
 }

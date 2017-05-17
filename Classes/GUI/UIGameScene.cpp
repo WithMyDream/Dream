@@ -30,7 +30,19 @@ bool UIGameScene::init()
     Size winSize = cocos2d::Director::getInstance()->getWinSize();
     _world->setMainUnitViewSize(b2Vec2(winSize.width/B2SCALE, winSize.height/B2SCALE));
     
+    // main unit
     Unit* mainUnit = _world->createUnit(1);
+    
+    mainUnit->getB2Body()->SetTransform(b2Vec2(_world->getMainUnitViewSize().x/2.0f, _world->getMainUnitViewSize().y/2.0f), mainUnit->getB2Body()->GetAngle());
+    b2FixtureDef fixtureDef;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.8f;
+    fixtureDef.restitution = 0.0f;
+    b2CircleShape circleShape;
+    circleShape.m_radius = 50.0f/B2SCALE;
+    fixtureDef.shape = &circleShape;
+    mainUnit->getB2Body()->CreateFixture(&fixtureDef);
+    
     std::string name("Jon");
 	mainUnit->setName(name);
 	mainUnit->setType(UnitTypeHero);
