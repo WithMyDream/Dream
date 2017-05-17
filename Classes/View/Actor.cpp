@@ -1,9 +1,9 @@
 #include "Actor.h"
 
-Actor* Actor::create()
+Actor* Actor::create(Unit* unit)
 {
     Actor* actor = new Actor();
-    if (actor && actor->init()) {
+    if (actor && actor->init(Unit* unit)) {
         actor->autorelease();
     }
     return actor;
@@ -22,8 +22,32 @@ Actor::~Actor()
     _unit = nullptr;
 }
 
-bool Actor::init()
+bool Actor::init(Unit* unit)
 {
+	_unit = unit;
+	if (_unit)
+	{
+		switch (_unit->getType())
+		{
+		case UnitTypeHero:
+
+			break;
+		case UnitTypeRope:
+
+			break;
+		case UnitTypeGround:
+		{
+			Color4B color(255, 255, 255, 255);
+			const b2Vec2& size = unit->getSize();
+			LayerColor* layerColor = LayerColor::create(color, size.x*B2SCALE, size.y*B2SCALE);
+			addChild(layerColor);
+			break;
+		}
+		default:
+			CCLOG("No need to init the unit type : %d", _unit->getType());
+			break;
+		}
+	}
     
     return true;
 }

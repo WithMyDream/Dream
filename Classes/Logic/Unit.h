@@ -11,6 +11,7 @@ class Rope;
 enum UnitType
 {
 	UnitTypeUnknown,
+	UnitTypeRope,
 	UnitTypeHero,
 	UnitTypeJoint,
 	UnitTypeGround,
@@ -39,6 +40,9 @@ public:
     virtual void setAngle(float32 angle);
     virtual float32 getAngle();
 
+	virtual void setSize(b2Vec2& size) { _size = size; }
+	virtual const b2Vec2& getSize() { return _size; }
+
 	void setIndex(int index) { _index = index; }
 	int getIndex() { return _index; }
 
@@ -62,6 +66,7 @@ protected:
 protected:
     World*      _world; // weak ref
     b2Body*     _b2Body;
+	b2Vec2		_size;
 	bool		_isDestroy;
     
 	int			_index;

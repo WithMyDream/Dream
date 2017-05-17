@@ -51,8 +51,7 @@ void GameScene::onCreateUnit(EventParams &params)
 {
     ECreateUnit create = static_cast<ECreateUnit&>(params);
     //CCLOG("[onCreateUnit] %08x ", create._unit);
-    Actor* actor = Actor::create();
-    actor->setUnit(create._unit);
+    Actor* actor = Actor::create(create._unit);
     actor->setLocalZOrder(-1);
     addChild(actor);
     _actors.push_back(actor);
@@ -65,8 +64,7 @@ void GameScene::onCreateRope(EventParams &params)
 {
 	ECreateRope create = static_cast<ECreateRope&>(params);
 	//CCLOG("[onCreateRope] %08x ", create._rope);
-	Actor* actor = Actor::create();
-	actor->setUnit(create._rope);
+	Actor* actor = Actor::create(create._rope);
 	actor->setLocalZOrder(-1);
 	addChild(actor);
 	_actors.push_back(actor);

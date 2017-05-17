@@ -10,16 +10,15 @@ using namespace cocos2d;
 class Actor : public Node
 {
 public:
-    static Actor* create();
+    static Actor* create(Unit* unit);
     
     Actor();
     ~Actor();
-    bool init();
+    bool init(Unit* unit);
 	void end();
 	void destroy() { _isDestroy = true; }
 	bool isDestroy() const { return _isDestroy; }
     
-    void setUnit(Unit* unit){_unit = unit; }
 	Unit* getUnit() { return _unit; }
     
     void update(float dt);

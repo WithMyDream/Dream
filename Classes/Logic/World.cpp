@@ -184,6 +184,9 @@ void World::loadWorldTMX(const std::string& tmxPath)
             polygon.SetAsBox(width/2.0f/B2SCALE, height/2.0f/B2SCALE);
             fixtureDef.shape = &polygon;
             b2body->CreateFixture(&fixtureDef);
+
+			b2Vec2 size(width/B2SCALE, height/B2SCALE);
+			unit->setSize(size);
             
             if ("joint1" == name)
             {
@@ -282,6 +285,7 @@ Unit* World::createUnit(int ID)
 Rope* World::createRope(int ID)
 {
     Rope* rope = Rope::create(this, ID);
+	rope->setType(UnitTypeRope);
     
     rope->retain();
     _units.push_back(rope);
