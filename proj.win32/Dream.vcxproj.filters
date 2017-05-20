@@ -19,6 +19,9 @@
     <Filter Include="src\GUI">
       <UniqueIdentifier>{0e7b95e3-3422-4ca6-9f4a-e8d2dc30806d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ColorMgr">
+      <UniqueIdentifier>{b7e08726-0d60-4455-ab78-99765705fd11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\View\GLESDebugDraw.cpp">
       <Filter>src\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ColorMgr\ColorMgr.cpp">
+      <Filter>src\ColorMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\View\GLESDebugDraw.h">
       <Filter>src\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ColorMgr\ColorMgr.h">
+      <Filter>src\ColorMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

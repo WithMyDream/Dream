@@ -19,7 +19,7 @@ bool UIGameScene::init()
     _world = World::create();
     _world->retain();
     _scene = GameScene::create();
-    _scene->setDebugDraw(_world->getB2World());
+    //_scene->setDebugDraw(_world->getB2World());
     addChild(_scene);
     
     _joystick = UIInputLayer::create();

@@ -19,6 +19,7 @@ public:
     bool init() override;
     
     void setDebugDraw(b2World* b2word);
+	void setDebugDrawVisible(bool isVisible);
     
     void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
     

@@ -41,6 +41,11 @@ void GameScene::setDebugDraw(b2World* b2word)
     addChild(_debugDrawLayer, 9999999);
 }
 
+void GameScene::setDebugDrawVisible(bool isVisible)
+{
+	_debugDrawLayer->setVisible(isVisible);
+}
+
 void GameScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 {
    if (_debugDrawLayer)

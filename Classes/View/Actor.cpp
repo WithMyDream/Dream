@@ -1,5 +1,7 @@
 #include "Actor.h"
 
+#include "../ColorMgr/ColorMgr.h"
+
 Actor* Actor::create(Unit* unit)
 {
     Actor* actor = new Actor();
@@ -37,7 +39,7 @@ bool Actor::init(Unit* unit)
 			break;
 		case UnitTypeGround:
 		{
-			Color4B color(255, 255, 255, 255);
+			const Color4B& color = ColorMgr::getInstance()->getRandomColor();
 			const b2Vec2& size = unit->getSize();
 			LayerColor* layerColor = LayerColor::create(color, size.x*B2SCALE, size.y*B2SCALE);
             layerColor->setPosition(-size.x*B2SCALE/2.0f, -size.y*B2SCALE/2.0f);
