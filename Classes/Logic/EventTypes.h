@@ -3,7 +3,8 @@
 
 enum EventType
 {
-    EventCreateUnit = 0,
+    EventLoadMap = 0,
+    EventCreateUnit,
 	EventCreateRope,
 	EventDestroyUnit,
 	EventSetMainUnit,
@@ -18,6 +19,17 @@ public:
     EventParams(EventType eventType):_eventType(eventType){};
     
     EventType _eventType;
+};
+
+class World;
+class ELoadMap : public EventParams
+{
+public:
+    ELoadMap(World* world):EventParams(EventLoadMap)
+    ,_world(world)
+    {};
+    
+    World* _world;
 };
 
 class Unit;

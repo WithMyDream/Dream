@@ -78,6 +78,9 @@ bool B2DebugDrawLayer::init()
 
 void B2DebugDrawLayer::draw(Renderer *renderer, const Mat4& transform, bool transformUpdated)
 {
+    if (!isVisible())
+        return;
+    
     //
     // IMPORTANT:
     // This is only for debug purposes

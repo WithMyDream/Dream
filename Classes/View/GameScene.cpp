@@ -25,6 +25,11 @@ bool GameScene::init()
 {
     Node::init();
     
+    _bgNode = Node::create();
+    _bgNode->setLocalZOrder(-1);
+    addChild(_bgNode);
+    
+    REGISTER_EVENT(EventLoadMap, onLoadMap);
     REGISTER_EVENT(EventCreateUnit, onCreateUnit);
     REGISTER_EVENT(EventDestroyUnit, onDestroyUnit);
 	REGISTER_EVENT(EventSetMainUnit, onSetMainUnit);
@@ -50,6 +55,17 @@ void GameScene::draw(Renderer *renderer, const Mat4& transform, uint32_t flags)
 {
    if (_debugDrawLayer)
        _debugDrawLayer->draw(renderer, transform, flags);
+}
+
+void GameScene::onLoadMap(EventParams &params)
+{
+    ELoadMap load = static_cast<ELoadMap&>(params);
+    
+    Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    LayerGradient* layerColor = LayerGradient::create(Color4B(237, 232, 229, 255), Color4B(171, 222, 217, 255), Vec2(0.0f, -1.0f));
+    layerColor->setContentSize(winSize);
+    layerColor->setPosition(-winSize.width/2.0f, -winSize.height/2.0f);
+    _bgNode->addChild(layerColor);
 }
 
 void GameScene::onCreateUnit(EventParams &params)
@@ -94,13 +110,18 @@ void GameScene::onSetMainUnit(EventParams &params)
 	Actor* actor = findActorWithUnit(create._unit);
 	if (actor)
 	{
-		actor->addChild(Sprite::create("HelloWorld.png")); // test
+        Sprite* ball = Sprite::create("CloseNormal.png");
+        ball->setScale(2.0f);
+		actor->addChild(ball); // test
 		runAction(Follow::create(actor));
+        _bgNode->runAction(Follow::create(this));
 	}
 }
 
 void GameScene::onJoystick(EventParams &params)
 {
+    return;
+    
     EJoystick joystick = static_cast<EJoystick&>(params);
     //CCLOG("angle %f", joystick._angle);
     if (joystick._angle == -1) {

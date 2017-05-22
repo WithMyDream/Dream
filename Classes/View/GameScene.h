@@ -23,6 +23,7 @@ public:
     
     void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
     
+    void onLoadMap(EventParams &params);
     void onCreateUnit(EventParams &params);
 	void onCreateRope(EventParams &params);
 	void onDestroyUnit(EventParams &params);
@@ -40,6 +41,7 @@ private:
     std::vector<Actor*> _actors;
 	std::vector<int> _deleteActorIndexs;
     
+    Node* _bgNode;
     B2DebugDrawLayer*   _debugDrawLayer;
 };
 

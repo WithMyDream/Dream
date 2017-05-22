@@ -5,6 +5,8 @@
 
 using namespace cocos2d;
 
+const int ColorNum = 5;
+
 class ColorMgr : public Ref
 {
 public:
@@ -18,7 +20,8 @@ public:
 	const Color4B& getRandomColor();
 	
 private:
-
+    int _indexs[ColorNum];
+    int _currIndex;
 };
 
 #endif // __ColorMgr_H__

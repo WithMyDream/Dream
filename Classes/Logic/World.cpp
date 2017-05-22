@@ -150,6 +150,9 @@ void World::loadWorldTMX(const std::string& tmxPath)
     cocos2d::TMXObjectGroup* logicLayer = tmxMap->getObjectGroup("logic");
     float mapHeight = tmxMap->getMapSize().height * tmxMap->getTileSize().height;
     
+    ELoadMap params(this);
+    EventMgr::getInatence()->notify(params);
+    
     const cocos2d::ValueVector& valueVector = logicLayer->getObjects();
     cocos2d::ValueVector::const_iterator it = valueVector.begin();
     int i = 0;
@@ -339,7 +342,7 @@ void World::onButton(EventParams &params)
     //CCLOG("[World::onButton] index : %d", button._index);
     
     if (_mainUnit)
-        _mainUnit->hang(nullptr);
+        _mainUnit->jump();
 }
 
 void World::pusher(float dt)

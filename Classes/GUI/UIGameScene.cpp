@@ -19,7 +19,8 @@ bool UIGameScene::init()
     _world = World::create();
     _world->retain();
     _scene = GameScene::create();
-    //_scene->setDebugDraw(_world->getB2World());
+    _scene->setDebugDraw(_world->getB2World());
+    _scene->setDebugDrawVisible(false);
     addChild(_scene);
     
     _joystick = UIInputLayer::create();
@@ -59,7 +60,7 @@ bool UIGameScene::init()
     
     //rope->linkUnits(_world->joint1, _world->getMainUnit());
     
-    mainUnit->hang(_world->joint1);
+    //mainUnit->hang(_world->joint1);
     
     
     return true;

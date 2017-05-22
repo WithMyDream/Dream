@@ -116,7 +116,7 @@ void Unit::move(float angle)
     _currDir = dir;
     
     
-    // reset
+    /* reset
     if (_currDir == 1)       // up
     {
         
@@ -134,7 +134,7 @@ void Unit::move(float angle)
         _b2Body->ApplyLinearImpulse(b2Vec2(100.0f, 0.0f), _b2Body->GetWorldCenter(), true);
     }
     _currDir = -1;
-    
+    */
 }
 
 void Unit::jump()
